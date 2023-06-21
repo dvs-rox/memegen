@@ -17,19 +17,20 @@ function renderMeme() {
         drawText(meme.lines[0])
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
-    // const image = new Image()
-    // image.onload = () => {
-    //     gCtx.drawImage(image, 0, 0)
-    //     drawText()
-    // }
-    // image.src = './img/templates/2.jpg'
 }
 function drawText(line){
+    gCtx.strokeStyle ='Black'
     gCtx.fillStyle = line.color
     gCtx.font = `${line.size}px Impact`
-    gCtx.fillText(line.txt,20,50)
+
+    gCtx.fillText(line.txt, 50, 30)
+    gCtx.strokeText(line.txt, 50, 30)
 }
 function onTextChange(ev){
     setLineText(ev.target.value,0)
+    renderMeme()
+}
+function onImageChange(imgIdx){
+    setMemeImage(imgIdx)
     renderMeme()
 }
