@@ -22,7 +22,10 @@ function drawText(line) {
     gCtx.strokeStyle = 'Black'
     gCtx.fillStyle = line.color
     gCtx.font = `${line.size}px Impact`
-    // if (line.txt.length * line.size > 500) { // TODO: figure out line breaks!
+    // TODO: figure out line breaks!
+    
+    // console.log(gCtx.measureText(line.txt))
+    // if (line.txt.length * line.size > 500) { 
     //     for (var i = 0; i < line.txt.length; i++) {
     //         if(i)
     //     }
@@ -37,4 +40,9 @@ function onTextChange(ev) {
 function onImageChange(imgIdx) {
     setMemeImage(imgIdx)
     renderMeme()
+}
+function onDownloadImage(ev){
+    const elLink = ev.target
+    const imgContent = gElCanvas.toDataURL('image/jpg')
+    elLink.href = imgContent
 }
