@@ -2,6 +2,7 @@
 let gElCanvas
 let gCtx
 
+
 function onInit() {
     gElCanvas = document.getElementById('canvas-editor')
     gCtx = gElCanvas.getContext('2d')
@@ -14,14 +15,18 @@ function renderMeme() {
     const image = new Image()
     image.onload = () => {
         gCtx.drawImage(image, 0, 0)
-        drawText(meme.lines[0])
+        // drawText(meme.lines[0])
+        meme.lines.forEach((line, lineIdx) => {
+            drawText(line, lineIdx)
+        });
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
 }
-function drawText(line) {
+function drawText(line, lineIdx) {
     gCtx.strokeStyle = 'Black'
     gCtx.fillStyle = line.color
     gCtx.font = `${line.size}px Impact`
+    gCtx.textAlign = 'center'
     // TODO: figure out line breaks!
 
     // console.log(gCtx.measureText(line.txt))
@@ -30,12 +35,27 @@ function drawText(line) {
     //         if(i)
     //     }
     // }
-    gCtx.textAlign = 'center'
-    gCtx.fillText(line.txt, gElCanvas.width / 2, line.size)
-    gCtx.strokeText(line.txt, gElCanvas.width / 2, line.size)
+    switch (lineIdx) {
+        case 0: {
+            gCtx.fillText(line.txt, gElCanvas.width / 2, line.size)
+            gCtx.strokeText(line.txt, gElCanvas.width / 2, line.size)
+            break;
+        }
+        case 1:{
+            gCtx.fillText(line.txt, gElCanvas.width / 2,  gElCanvas.height - line.size/2)
+            gCtx.strokeText(line.txt, gElCanvas.width / 2,gElCanvas.height -  line.size/2)
+            break;
+        }
+        default:{
+            gCtx.fillText(line.txt, gElCanvas.width / 2,  gElCanvas.height/2)
+            gCtx.strokeText(line.txt, gElCanvas.width / 2,gElCanvas.height/2)
+            break;
+        }
+    }
+
 }
 function onTextChange(ev) {
-    setLineText(ev.target.value, 0)
+    setLineText(ev.target.value)
     renderMeme()
 }
 function onImageChange(imgIdx) {
@@ -54,4 +74,14 @@ function onDownloadImage(ev) {
 function onFontSizeChange(val) {
     setTextSize(val)
     renderMeme()
+}
+function onAddLine(){
+    addLine()
+    renderMeme()
+}
+function onSwitchLine(){
+    scrollLineIndex()
+}
+function renderSelector(){//Draw rectangle around selected line, this'll be a headache I can tell
+
 }
