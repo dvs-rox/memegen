@@ -6,14 +6,24 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: `I have no clue what I'm doing`,
+            txt: `I have no clue \n what I'm doing`,
+            txtWidth:null,
             size: 40,
-            color: 'white'
+            color: 'white',
+            cornerCoords:{
+                x:null,
+                y:null
+            }
         },
         {
             txt: `But I'm trying my best uwu`,
+            txtWidth:null,
             size: 40,
-            color: 'white'
+            color: 'white',
+            cornerCoords:{
+                x:null,
+                y:null
+            }
         }
     ]
 }
@@ -28,14 +38,15 @@ function addLine(text = 'add text here :DDDD') {
     })
 }
 function scrollLineIndex() {
-    (gCurrentLineIndex+1 >= gMeme.lines.length) ?  setLineIndex(0) : setLineIndex(gCurrentLineIndex + 1) 
-    // if(gCurrentLineIndex+1 >= gMeme.lines.length)
-    console.log(gCurrentLineIndex)
+    (gCurrentLineIndex+1 >= gMeme.lines.length) ?  setLineIndex(0) : setLineIndex(gCurrentLineIndex + 1)
 }
 
 //GETS
 function getMeme() {
     return gMeme
+}
+function getCurrentLineIdx(){
+    return gCurrentLineIndex
 }
 //SETS (only sets I get in lol)
 function setLineText(text, lineIdx = gCurrentLineIndex) {
