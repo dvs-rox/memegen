@@ -64,4 +64,5 @@ function setTextSize(sizeDiff, line = gCurrentLineIndex) {
 }
 function setLineIndex(val) {
     gCurrentLineIndex = val
+    console.log(gCurrentLineIndex)
 }

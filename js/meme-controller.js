@@ -6,29 +6,31 @@ let gCtx
 function onInit() {
     gElCanvas = document.getElementById('canvas-editor')
     gCtx = gElCanvas.getContext('2d')
+    initListeners()
     renderMeme()
     renderGallery()
 }
 
 //I feel no need for comments here as the func names seem rather self explanetory
 function renderMeme() {
+    clearCanvas()//reset canvas, I suspect this absolutely sucks since it has to load everytime
     const meme = getMeme()
     const image = new Image()
     image.onload = () => {
         gCtx.drawImage(image, 0, 0)
         meme.lines.forEach((line, lineIdx) => {
             drawText(line, lineIdx)
-            renderSelector()
         });
+        renderSelector()
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
 }
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
     const line = getMeme().lines[getCurrentLineIdx()]
+    console.log(line)
     const padding = 4//used to determine padding of text inside 'border'
-    // console.log(line)
     gCtx.beginPath()
-    gCtx.rect(line.cornerCoords.x, line.cornerCoords.y, line.txtWidth, line.size)
+    gCtx.rect(line.cornerCoords.x-padding/2, line.cornerCoords.y, line.txtWidth+padding, line.size)
     gCtx.stroke()
 }
 function clearCanvas(){// used for clearing selector
@@ -70,14 +72,16 @@ function drawText(line, lineIdx) {
                 y: gElCanvas.height - line.size * 1.4// idk why this works lmao (magic number)
             }
             
-            // const x = (gElCanvas.width - gCtx.measureText(line.txt).width) / 2 - 2
-            // const y = gElCanvas.height - line.size * 1.4
-            // renderSelector(gCtx.measureText(line.txt).width + 4, line.size + 2, x, y)
             break;
         }
         default: {
             gCtx.fillText(line.txt, gElCanvas.width / 2, gElCanvas.height / 2)
             gCtx.strokeText(line.txt, gElCanvas.width / 2, gElCanvas.height / 2)
+            line.txtWidth = gCtx.measureText(line.txt).width
+            line.cornerCoords = {
+                x: (gElCanvas.width - line.txtWidth) / 2,
+                y: gElCanvas.height/2 - line.size// idk why this works lmao (magic number)
+            }
             break;
         }
     }
