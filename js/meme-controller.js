@@ -18,9 +18,21 @@ function renderMeme() {
         gCtx.drawImage(image, 0, 0)
         meme.lines.forEach((line, lineIdx) => {
             drawText(line, lineIdx)
+            renderSelector()
         });
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
+}
+function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
+    const line = getMeme().lines[getCurrentLineIdx()]
+    const padding = 4//used to determine padding of text inside 'border'
+    // console.log(line)
+    gCtx.beginPath()
+    gCtx.rect(line.cornerCoords.x, line.cornerCoords.y, line.txtWidth, line.size)
+    gCtx.stroke()
+}
+function clearCanvas(){// used for clearing selector
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
 }
 function drawText(line, lineIdx) {
     gCtx.strokeStyle = 'Black'
@@ -41,17 +53,23 @@ function drawText(line, lineIdx) {
             gCtx.fillText(line.txt, gElCanvas.width / 2, line.size)
             gCtx.strokeText(line.txt, gElCanvas.width / 2, line.size)
             //setting params for selector
-            line.cornerCoords = {
-                x: (gElCanvas.width - gCtx.measureText(line.txt).width) / 2 - 2,
-                y: line.size / 10
-            }
             line.txtWidth = gCtx.measureText(line.txt).width
+            line.cornerCoords = {
+                x: (gElCanvas.width - line.txtWidth ) / 2,
+                y: line.size / 10// idk why this works lmao (magic number)
+            }
             break;
         }
         case 1: {
             gCtx.fillText(line.txt, gElCanvas.width / 2, gElCanvas.height - line.size / 2)
             gCtx.strokeText(line.txt, gElCanvas.width / 2, gElCanvas.height - line.size / 2)
             //setting params for selector
+            line.txtWidth = gCtx.measureText(line.txt).width
+            line.cornerCoords = {
+                x: (gElCanvas.width - line.txtWidth) / 2,
+                y: gElCanvas.height - line.size * 1.4// idk why this works lmao (magic number)
+            }
+            
             // const x = (gElCanvas.width - gCtx.measureText(line.txt).width) / 2 - 2
             // const y = gElCanvas.height - line.size * 1.4
             // renderSelector(gCtx.measureText(line.txt).width + 4, line.size + 2, x, y)
@@ -91,17 +109,7 @@ function onAddLine() {
     renderMeme()
 }
 function onSwitchLine() {
-    renderSelector()
+    renderMeme()
     scrollLineIndex()
 }
-function clearCanvas(){// used for clearing selector
 
-}
-function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
-    const line = getMeme().lines[getCurrentLineIdx()]
-    console.log(line)
-
-    gCtx.beginPath()
-    gCtx.rect(line.cornerCoords.x, line.cornerCoords.y, line.txtWidth, line.size)
-    gCtx.stroke()
-}
