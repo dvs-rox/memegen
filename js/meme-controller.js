@@ -24,13 +24,11 @@ function renderMeme() {
     // image.src = './img/templates/2.jpg'
 }
 function drawText(line){
-    // lines:[
-    //     {
-    //         txt:`I have no clue what I'm doing`,
-    //         size:20,
-    //         color:'white'
-    //     }
     gCtx.fillStyle = line.color
     gCtx.font = `${line.size}px Impact`
     gCtx.fillText(line.txt,20,50)
+}
+function onTextChange(ev){
+    setLineText(ev.target.value,0)
+    renderMeme()
 }

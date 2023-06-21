@@ -16,3 +16,6 @@ var gKeywordSearchCountMap
 function getMeme(){
     return gMeme
 }
+function setLineText(text, lineIdx){
+    gMeme.lines[lineIdx].txt = text
+}
