@@ -14,14 +14,15 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
         const xStart = line.cornerCoords.x
         const xEnd = line.cornerCoords.x + line.txtWidth
         const yStart = line.cornerCoords.y
-        const yEnd = line.cornerCoords.y +line.size
-        if(gCursor.x>xStart&&gCursor.x<xEnd&&gCursor.y>yStart&&gCursor.y<yEnd){
+        const yEnd = line.cornerCoords.y + line.size
+        if (gCursor.x > xStart && gCursor.x < xEnd && gCursor.y > yStart && gCursor.y < yEnd) {
             return line
         }
     })
-    console.log(lineIdx)
-    setLineIndex(lineIdx)
-    renderMeme()
+    if (lineIdx != -1) {
+        setLineIndex(lineIdx)
+        renderMeme()
+    }
 }
 //sets
 function _setCursorPosition(event) {//used only by event

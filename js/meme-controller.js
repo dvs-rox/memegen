@@ -27,7 +27,6 @@ function renderMeme() {
 }
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
     const line = getMeme().lines[getCurrentLineIdx()]
-    console.log(line)
     const padding = 4//used to determine padding of text inside 'border'
     gCtx.beginPath()
     gCtx.rect(line.cornerCoords.x-padding/2, line.cornerCoords.y, line.txtWidth+padding, line.size)
