@@ -23,15 +23,16 @@ function drawText(line) {
     gCtx.fillStyle = line.color
     gCtx.font = `${line.size}px Impact`
     // TODO: figure out line breaks!
-    
+
     // console.log(gCtx.measureText(line.txt))
     // if (line.txt.length * line.size > 500) { 
     //     for (var i = 0; i < line.txt.length; i++) {
     //         if(i)
     //     }
     // }
-    gCtx.fillText(line.txt, 20, line.size)
-    gCtx.strokeText(line.txt, 20, line.size)
+    gCtx.textAlign = 'center'
+    gCtx.fillText(line.txt, gElCanvas.width / 2, line.size)
+    gCtx.strokeText(line.txt, gElCanvas.width / 2, line.size)
 }
 function onTextChange(ev) {
     setLineText(ev.target.value, 0)
@@ -41,8 +42,16 @@ function onImageChange(imgIdx) {
     setMemeImage(imgIdx)
     renderMeme()
 }
-function onDownloadImage(ev){
+function onColorChange(ev) {
+    setTextColor(ev.target.value)
+    renderMeme()
+}
+function onDownloadImage(ev) {
     const elLink = ev.target
     const imgContent = gElCanvas.toDataURL('image/jpg')
     elLink.href = imgContent
+}
+function onFontSizeChange(val) {
+    setTextSize(val)
+    renderMeme()
 }
