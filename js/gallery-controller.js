@@ -1,10 +1,10 @@
 'use strict'
 const gElGallery = document.querySelector('.gallery')
 function renderGallery() {
-    let strHtml = `<article class="card">`
+    let strHtml = ``
     for (var i = 1; i < 10; i++) {
-        strHtml += `<img src="./img/templates/${i}.jpg" onclick="onImageChange(${i})">`
+        strHtml += `<article class="card"><img src="./img/templates/${i}.jpg" onclick="onImageChange(${i})"></article>`
     }
-    strHtml += `</article>`
+    strHtml += ``
     gElGallery.innerHTML = strHtml
 }

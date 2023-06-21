@@ -6,7 +6,7 @@ var gMeme = {
     lines:[
         {
             txt:`I have no clue what I'm doing`,
-            size:20,
+            size:40,
             color:'white'
         }
     ]
