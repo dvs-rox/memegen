@@ -1,7 +1,12 @@
 /* setup */
+@import url('setup/variables.css');
+@import url('setup/typography.css');
+
 @import url('basics/base.css');
 @import url('basics/layout.css');
+@import url('basics/helpers.css');
 
 /*components*/
 @import url('components/editor.css');
 @import url('components/gallery.css');
+@import url('components/header.css');

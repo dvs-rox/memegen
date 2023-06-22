@@ -9,18 +9,19 @@
 </head>
 
 <body onload="onInit()">
-    <header>
+    
 
-    </header>
-    <nav class="nav-container">
-        <h1>Meme generator</h1>
-        <ul>
-            <li>Editor</li>
-            <li>Gallery</li>
-            <li>about</li>
-        </ul>
-    </nav>
     <main class="main-layout">
+        <header>
+            <nav class="nav-container flex space-between">
+                <h1 class="capitalize neon-text-shadow" title="but make it vaporwave">meme generator</h1>
+                <ul class="clean-list capitalize flex space-between">
+                    <li><a href="#">Editor</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">about</a></li>
+                </ul>
+            </nav>
+        </header>
         <section class="editor">
             <canvas width="500" height="500" id="canvas-editor">
 
@@ -37,7 +38,8 @@
                 <button name="switchLine" title="switch line" onclick="onSwitchLine()">switch line</button>
             </div>
 
-            <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)" download="my meme.jpg">download image</a>
+            <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)"
+                download="my meme.jpg">download image</a>
         </section>
         <section class="gallery">
 

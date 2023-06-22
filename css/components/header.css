@@ -1,0 +1,46 @@
+header{
+    grid-column: 1 / -1;
+    margin-block-end: 60px;
+    height: fit-content;
+    background: linear-gradient(150deg, var(--clr-background-primary) 7%, var(--clr-background-secondary) 91%);
+}
+header nav{
+    flex-direction: row;
+    margin-inline:100px;
+}
+header h1{
+    color: var(--clr-font-primary);
+    font-family: neonLed;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin:0;
+    margin-block: 2rem;
+    margin-inline-start: 1rem;
+}
+header ul{
+    gap: .2rem;
+    margin: 0;
+}
+header ul li{
+    display: flex;
+    align-items: center;
+    font-family: chakra;
+    /* border: 2px solid var(--clr-font-secondary); */
+    width: 7rem;
+    justify-content: center;
+}
+header ul li a{
+    color: var(--clr-font-primary);
+    text-shadow: var(--clr-font-shadow-primary) 3px 3px  20px;
+    font-size: 2rem;
+    text-decoration: none;
+}
+header ul li a:hover{
+    text-decoration: underline;
+}
+header ul li a:visited{
+
+}
+.neon-text-shadow{
+    text-shadow: var(--clr-font-shadow-primary) 1rem 0 20px;
+}

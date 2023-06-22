@@ -1,0 +1,12 @@
+.flex{
+    display: flex;
+}
+.space-between{
+    justify-content: space-between;
+}
+.clean-list{
+    list-style-type: none;
+}
+.capitalize{
+    text-transform: capitalize;
+}

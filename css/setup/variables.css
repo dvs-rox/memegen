@@ -3,7 +3,9 @@
     --clr-font-primary:#00FFFF;
     --clr-font-secondary:#633B5F;
     --clr-background-primary:#000000;/*gonna use 2 colors for a sick gradient*/
-    --clr-background-secondary:#AB47BC;
+    --clr-background-secondary:#de7fef;
+    --clr-font-shadow-primary:#00CED1;
+    --clr-editor-background:#f4ffa3d8;
 }
 /* Miami Vice Pink: #FF6ACD
 Electric Blue: #00FFFF
