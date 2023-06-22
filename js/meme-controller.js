@@ -12,7 +12,7 @@ function onInit() {
 }
 
 //I feel no need for comments here as the func names seem rather self explanetory
-function renderMeme() {
+function renderMeme(showSelector = true) {
     clearCanvas()//reset canvas, I suspect this absolutely sucks since it has to load everytime
     const meme = getMeme()
     const image = new Image()
@@ -21,7 +21,7 @@ function renderMeme() {
         meme.lines.forEach((line, lineIdx) => {
             drawText(line, lineIdx)
         });
-        renderSelector()
+        if (showSelector) renderSelector()
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
 }
@@ -43,12 +43,7 @@ function drawText(line, lineIdx) {
     gCtx.textBaseLine = 'middle'
     // TODO: figure out line breaks!
 
-    // console.log(gCtx.measureText(line.txt))
-    // if (line.txt.length * line.size > 500) { 
-    //     for (var i = 0; i < line.txt.length; i++) {
-    //         if(i)
-    //     }
-    // }
+    line.txt = line.txt.toUpperCase()
     switch (lineIdx) {
         case 0: {
             gCtx.fillText(line.txt, gElCanvas.width / 2, line.size)
@@ -91,6 +86,7 @@ function onTextChange(ev) {
     renderMeme()
 }
 function onImageChange(imgIdx) {
+    onNavLinkClick({ target: { innerText: 'editor' } })
     setMemeImage(imgIdx)
     renderMeme()
 }
@@ -99,9 +95,13 @@ function onColorChange(ev) {
     renderMeme()
 }
 function onDownloadImage(ev) {//TODO: make sure the selector is removed before downloading!!
-    const elLink = ev.target
-    const imgContent = gElCanvas.toDataURL('image/jpg')
-    elLink.href = imgContent
+    renderMeme(false)
+    setTimeout(() => {
+        const elLink = ev.target
+        const imgContent = gElCanvas.toDataURL('image/jpg')
+        elLink.href = imgContent
+        ev.href = self.href
+    }, 500);
 }
 function onFontSizeChange(val) {
     setTextSize(val)

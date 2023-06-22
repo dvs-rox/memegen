@@ -6,7 +6,7 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: `I have no clue \n what I'm doing`,
+            txt: `Top text`,
             txtWidth:null,
             size: 40,
             color: 'white',
@@ -16,7 +16,7 @@ var gMeme = {
             }
         },
         {
-            txt: `But I'm trying my best uwu`,
+            txt: `Bottom text`,
             txtWidth:null,
             size: 40,
             color: 'white',

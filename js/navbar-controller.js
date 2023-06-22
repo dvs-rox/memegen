@@ -7,15 +7,12 @@ function onNavLinkClick(ev) {
     hideAllSections()
     switch (selectedLink.innerText.toLowerCase()) {
         case 'editor':
-            selectedLink.classList.add('selected')
             gElEditor.style= ''
             break
         case 'gallery':
-            selectedLink.classList.add('selected')
             gElGallery.style = ''
             break
         case 'about':
-            selectedLink.classList.add('selected')
             break
     }
 }
