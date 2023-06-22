@@ -1,3 +1,38 @@
 .editor{
     grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr auto;
+}
+.editor-controls{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "textBox textBox textBox"
+    "txtIncrese txtDecrease colorPicker"
+    "addLine switchLine switchLine";
+}
+input[name='linetext']{
+    grid-area: textBox;
+    height: 2rem;
+}
+input[name='txtColorPicker']{
+    grid-area:colorPicker;
+    justify-self: center;
+    align-self: center;
+}
+input[name='imgDownload']{
+    grid-area:downloadLink;
+}
+input[name='txtIncrease']{
+    grid-area: txtIncrease;
+}
+input[name='txtDecrease']{
+    grid-area: txtDecrease;
+}
+input[name='addLine']{
+    grid-area: addLine;
+}
+input[name='switchLine']{
+    grid-area: switchLine;
 }

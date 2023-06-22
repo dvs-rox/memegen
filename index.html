@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memegen</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body onload="onInit()">
     <header>
 
     </header>
+    <nav class="nav-container">
+        <h1>Meme generator</h1>
+        <ul>
+            <li>Editor</li>
+            <li>Gallery</li>
+            <li>about</li>
+        </ul>
+    </nav>
     <main class="main-layout">
         <section class="editor">
             <canvas width="500" height="500" id="canvas-editor">
 
             </canvas>
-            <div>
-                <label for="linetext">
-                    Text:
-                </label>
-                <input type="text" name="linetext" id="linetext" oninput="onTextChange(event)">
-                <input type="color" name="txtColorPicker" id="txtColorPicker" oninput="onColorChange(event)">
-                <a href="#" onclick="onDownloadImage(event)" download="my meme.jpg">download image</a>
-                <button onclick="onFontSizeChange(4)">increase font size</button>
-                <button onclick="onFontSizeChange(-4)">decrease font size</button>
-                <button onclick="onAddLine()">add line</button>
-                <button onclick="onSwitchLine()">switch line</button>
+            <div class="editor-controls">
+                <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)">
+                <input name="txtColorPicker" id="txtColorPicker" title="color picker for text color of current line"
+                    type="color" oninput="onColorChange(event)">
+                <button name="txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">increase font
+                    size</button>
+                <button name="txtDecrease" title="decrease font size" onclick="onFontSizeChange(-4)">decrease font
+                    size</button>
+                <button name="addLine" title="add line" onclick="onAddLine()">add line</button>
+                <button name="switchLine" title="switch line" onclick="onSwitchLine()">switch line</button>
             </div>
+
+            <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)" download="my meme.jpg">download image</a>
         </section>
         <section class="gallery">
 
@@ -37,4 +48,5 @@
     <script src="js/meme-controller.js"></script>
     <script src="js/gallery-controller.js"></script>
 </body>
+
 </html>

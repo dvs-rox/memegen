@@ -2,7 +2,7 @@
 let gElCanvas
 let gCtx
 
-
+//TODO:!!! when selecting a line adjust input values accordingly
 function onInit() {
     gElCanvas = document.getElementById('canvas-editor')
     gCtx = gElCanvas.getContext('2d')
@@ -16,6 +16,7 @@ function renderMeme() {
     clearCanvas()//reset canvas, I suspect this absolutely sucks since it has to load everytime
     const meme = getMeme()
     const image = new Image()
+    console.log(image)
     image.onload = () => {
         gCtx.drawImage(image, 0, 0)
         meme.lines.forEach((line, lineIdx) => {

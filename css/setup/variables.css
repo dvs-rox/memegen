@@ -1,0 +1,15 @@
+/* we may not have 11 shades of gray but I think this will do(lookin at u blogin) */
+:root{ 
+    --clr-font-primary:#00FFFF;
+    --clr-font-secondary:#633B5F;
+    --clr-background-primary:#000000;/*gonna use 2 colors for a sick gradient*/
+    --clr-background-secondary:#AB47BC;
+}
+/* Miami Vice Pink: #FF6ACD
+Electric Blue: #00FFFF
+Sunset Purple: #AB47BC
+Sakura Blossom: #FFC0CB
+Neon Green: #39FF14
+Retro Turquoise: #00CED1
+Golden Yellow: #FFD700
+Midnight Black: #000000 */
