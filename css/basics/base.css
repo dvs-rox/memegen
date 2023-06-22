@@ -3,5 +3,6 @@
 }
 body{
     margin:0;
-    
+    background-image: url('../../img/assets/colorful-retro-vaporwave-landscape.jpg');
+    background-position: center;
 }

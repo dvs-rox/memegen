@@ -16,7 +16,6 @@ function renderMeme() {
     clearCanvas()//reset canvas, I suspect this absolutely sucks since it has to load everytime
     const meme = getMeme()
     const image = new Image()
-    console.log(image)
     image.onload = () => {
         gCtx.drawImage(image, 0, 0)
         meme.lines.forEach((line, lineIdx) => {
@@ -99,7 +98,7 @@ function onColorChange(ev) {
     setTextColor(ev.target.value)
     renderMeme()
 }
-function onDownloadImage(ev) {
+function onDownloadImage(ev) {//TODO: make sure the selector is removed before downloading!!
     const elLink = ev.target
     const imgContent = gElCanvas.toDataURL('image/jpg')
     elLink.href = imgContent

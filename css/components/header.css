@@ -44,3 +44,6 @@ header ul li a:visited{
 .neon-text-shadow{
     text-shadow: var(--clr-font-shadow-primary) 1rem 0 20px;
 }
+.selected{
+    color:var(--clr-primary-1)
+}

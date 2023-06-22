@@ -10,3 +10,9 @@
 .capitalize{
     text-transform: capitalize;
 }
+.hidden{
+    visibility: none;
+}
+.visible{
+    visibility: visible;
+}
