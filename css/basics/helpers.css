@@ -11,7 +11,7 @@
     text-transform: capitalize;
 }
 .hidden{
-    visibility: none;
+    visibility: hidden;
 }
 .visible{
     visibility: visible;

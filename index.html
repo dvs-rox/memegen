@@ -9,8 +9,6 @@
 </head>
 
 <body onload="onInit()">
-    
-
     <main class="main-layout">
         <header>
             <nav class="nav-container flex space-between">
@@ -22,8 +20,11 @@
                 </ul>
             </nav>
         </header>
-        <section class="editor">
-            <canvas width="500" height="500" id="canvas-editor">
+        <section class="editor-container">
+            <div class="editor">
+                
+            </div>
+            <!-- <canvas width="500" height="500" id="canvas-editor">
 
             </canvas>
             <div class="editor-controls">
@@ -38,18 +39,19 @@
                 <button name="switchLine" title="switch line" onclick="onSwitchLine()">switch line</button>
             </div>
 
-            <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)"
-                download="my meme.jpg">download image</a>
+            <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)" download="my meme.jpg">download image</a> -->
         </section>
         <section class="gallery">
-
+            <div>
+                
+            </div>
         </section>
     </main>
+    <script src="js/gallery-controller.js"></script>
     <script src="js/services/mouse-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/navbar-controller.js"></script>
     <script src="js/meme-controller.js"></script>
-    <script src="js/gallery-controller.js"></script>
 </body>
 
 </html>

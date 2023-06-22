@@ -4,15 +4,15 @@ let gCtx
 
 //TODO:!!! when selecting a line adjust input values accordingly
 function onInit() {
+    renderMemeSectionHtml()//also calls renderMeme for reasons
     gElCanvas = document.getElementById('canvas-editor')
     gCtx = gElCanvas.getContext('2d')
     initListeners()
-    renderMeme()
-    renderGallery()
 }
 
 //I feel no need for comments here as the func names seem rather self explanetory
 function renderMeme() {
+
     clearCanvas()//reset canvas, I suspect this absolutely sucks since it has to load everytime
     const meme = getMeme()
     const image = new Image()
@@ -29,10 +29,10 @@ function renderSelector() {//Draw rectangle around selected line, this'll be a h
     const line = getMeme().lines[getCurrentLineIdx()]
     const padding = 4//used to determine padding of text inside 'border'
     gCtx.beginPath()
-    gCtx.rect(line.cornerCoords.x-padding/2, line.cornerCoords.y, line.txtWidth+padding, line.size)
+    gCtx.rect(line.cornerCoords.x - padding / 2, line.cornerCoords.y, line.txtWidth + padding, line.size)
     gCtx.stroke()
 }
-function clearCanvas(){// used for clearing selector
+function clearCanvas() {// used for clearing selector
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
 }
 function drawText(line, lineIdx) {
@@ -56,7 +56,7 @@ function drawText(line, lineIdx) {
             //setting params for selector
             line.txtWidth = gCtx.measureText(line.txt).width
             line.cornerCoords = {
-                x: (gElCanvas.width - line.txtWidth ) / 2,
+                x: (gElCanvas.width - line.txtWidth) / 2,
                 y: line.size / 10// idk why this works lmao (magic number)
             }
             break;
@@ -70,7 +70,7 @@ function drawText(line, lineIdx) {
                 x: (gElCanvas.width - line.txtWidth) / 2,
                 y: gElCanvas.height - line.size * 1.4// idk why this works lmao (magic number)
             }
-            
+
             break;
         }
         default: {
@@ -79,7 +79,7 @@ function drawText(line, lineIdx) {
             line.txtWidth = gCtx.measureText(line.txt).width
             line.cornerCoords = {
                 x: (gElCanvas.width - line.txtWidth) / 2,
-                y: gElCanvas.height/2 - line.size// idk why this works lmao (magic number)
+                y: gElCanvas.height / 2 - line.size// idk why this works lmao (magic number)
             }
             break;
         }
@@ -115,4 +115,24 @@ function onSwitchLine() {
     renderMeme()
     scrollLineIndex()
 }
+function renderMemeSectionHtml() {
+    const elDiv = document.querySelector('.editor-container div')
+    elDiv.innerHTML = `<canvas width="500" height="500" id="canvas-editor">
+    </canvas>
+    <div class="editor-controls">
+        <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)">
+        <input name="txtColorPicker" id="txtColorPicker" title="color picker for text color of current line"
+            type="color" oninput="onColorChange(event)">
+        <button name="txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">increase font
+            size</button>
+        <button name="txtDecrease" title="decrease font size" onclick="onFontSizeChange(-4)">decrease font
+            size</button>
+        <button name="addLine" title="add line" onclick="onAddLine()">add line</button>
+        <button name="switchLine" title="switch line" onclick="onSwitchLine()">switch line</button>
+    </div>
 
+    <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)" download="my meme.jpg">download image</a>`
+    gElCanvas = document.querySelector('canvas')
+    gCtx = gElCanvas.getContext('2d')
+    renderMeme()
+}

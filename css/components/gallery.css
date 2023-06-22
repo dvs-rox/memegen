@@ -1,8 +1,12 @@
-.gallery{
+.gallery-container{
     margin-block-start: 50px;
-    display: flex;
     grid-column: 2;
     grid-row: 2;
-    flex-flow: column;
-    display: none;
+    /* position: absolute; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    grid-auto-flow: dense;
+}
+.gallery article img{
+    max-width: 200px;
 }
