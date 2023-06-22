@@ -1,9 +1,8 @@
 
 .editor-container{
+    /* height: 600px; */
     grid-row: 2;
     grid-column: 2;
-}
-.editor{
     justify-self: center;
     display: grid;
     grid-template-columns: 500px 300px;
@@ -22,6 +21,14 @@
     "txtIncrese txtDecrease colorPicker"
     "addLine switchLine switchLine";
 }
+.editor-container a{
+    font-size: 2rem;
+    font-family: chakra;
+    color: var(--clr-background-primary);
+}
+
+
+
 input[name='linetext']{
     grid-area: textBox;
     height: 2rem;

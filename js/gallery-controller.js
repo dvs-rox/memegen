@@ -1,11 +1,10 @@
 'use strict'
-const gImgCount = 18//
-const gElGallery = document.querySelector('.gallery div')
+const gImgCount = 18
+const gElGallery = document.querySelector('.gallery-container')
 function renderGallery() {
     let strHtml = ``
     for (var i = 1; i <= gImgCount; i++) {
         strHtml += `<article class="card"><img src="./img/templates/${i}.jpg" onclick="onImageChange(${i})"></article>`
     }
-    strHtml += ``
     gElGallery.innerHTML = strHtml
 }

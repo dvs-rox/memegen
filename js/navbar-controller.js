@@ -1,5 +1,5 @@
 const gElNavbar = document.querySelector('nav')
-const gElEditor = document.querySelector('.editor')
+const gElEditor = document.querySelector('.editor-container')
 
 function onNavLinkClick(ev) {
     const selectedLink = ev.target
@@ -8,15 +8,11 @@ function onNavLinkClick(ev) {
     switch (selectedLink.innerText.toLowerCase()) {
         case 'editor':
             selectedLink.classList.add('selected')
-            gElEditor.classList.add('visible')
-            renderMemeSectionHtml()
-            renderMeme()
+            gElEditor.style= ''
             break
         case 'gallery':
             selectedLink.classList.add('selected')
-            gElGallery.classList.add('visible')
-            console.log(gElGallery)
-            renderGallery()
+            gElGallery.style = ''
             break
         case 'about':
             selectedLink.classList.add('selected')
@@ -29,11 +25,9 @@ function cleanNavBar() {
         a.classList.remove('selected')
     });
 }
-function hideAllSections(){
-    const elSections = document.querySelectorAll('section div')
+function hideAllSections() {
+    const elSections = document.querySelectorAll('section')
     elSections.forEach(section => {
-        section.classList.remove('visible')
-        section.classList.add('hidden')
-        section.innerHTML = ''
+        section.style = 'display:none'
     });
 }
