@@ -29,17 +29,21 @@ function renderMeme(showSelector = true, combineLayers = false) {
         meme.lines.forEach((line) => {
             if (line.isRotated) {
                 gCtx.save()
-                gCtx.rotate(Math.PI /180*line.angle, 0, 0)
+                gCtx.rotate(Math.PI / 180 * line.angle, 0, 0)
                 drawText(line, gCtx)
                 if (showSelector) renderSelector()
                 // line.isRotated = false
                 gCtx.restore()
-            }else drawText(line,gCtx)
+            } else {
+                drawText(line, gCtx)
+                if (showSelector) renderSelector()
+            }
         });
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
 }
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
+    console.log('drawing selector')
     const line = getMeme().lines[getCurrentLineIdx()]
     if (!line) return
     const padding = 4//used to determine padding of text inside 'border'

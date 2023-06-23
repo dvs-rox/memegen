@@ -22,8 +22,8 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
     const lineIdx = meme.lines.findIndex((line) => {
         const xStart = line.cornerCoords.x
         const xEnd = line.cornerCoords.x + line.txtWidth
-        const yStart = line.cornerCoords.y
-        const yEnd = line.cornerCoords.y + line.size
+        const yStart = line.cornerCoords.y - line.size/2
+        const yEnd = line.cornerCoords.y + line.size/2
         if (gCursor.x > xStart && gCursor.x < xEnd && gCursor.y > yStart && gCursor.y < yEnd) {
             return line
         }
@@ -37,12 +37,12 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
     }
 }
 function _enableLineDragging() {
-    console.log('enable line dragging')
+    // console.log('enable line dragging')
     gElCanvas.addEventListener('mousemove', _repositionLine, false)
     gElCanvas.addEventListener('mouseup', _disableLineDragging)
 }
 function _disableLineDragging() {
-    console.log('disable line dragging')
+    // console.log('disable line dragging')
     gElCanvas.removeEventListener('mousemove', _repositionLine, false)
 }
 function _repositionLine(event) {
