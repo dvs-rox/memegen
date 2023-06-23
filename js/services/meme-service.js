@@ -50,11 +50,7 @@ function getCurrentLineIdx() {
     return gCurrentLineIndex
 }
 //SETS (only sets I get in lol)
-function setLineText(text, lineIdx = gCurrentLineIndex) {
-    const line = gMeme.lines[lineIdx]
-    line.txt = text
-    updateTxtWidth()
-}
+
 function setMemeImage(imageIdx) {
     gMeme.selectedImgId = imageIdx
 }

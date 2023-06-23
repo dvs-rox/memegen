@@ -138,7 +138,6 @@ function onImageChange(imgIdx) {
     renderMeme()
 }
 function onColorChange(ev) {
-    console.log(ev.target.value)
     setTextColor(ev.target.value)
     renderMeme()
 }
