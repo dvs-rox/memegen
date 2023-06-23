@@ -23,8 +23,4 @@ function moveText(xDiff = 0, yDiff = 0) {
 function rotateText(dif = 45) {//actually correlates to rotating the canvas back and forth but semantically it does result in rotated text. May be moved into meme-service if it makes more sense
     gMeme.lines[gCurrentLineIndex].angle += dif
     gMeme.lines[gCurrentLineIndex].isRotated = true
-    // gCtx.save()
-    // gCtx.rotate(deg,0,0)
-    // drawText(gMeme.lines[0],gCtx)
-    // gCtx.restore()
 }

@@ -6,7 +6,7 @@ let gCtx
 let gElBgCanvas
 let gBgCtx
 let gElInputs
-
+let gImageDimensions
 //TODO:!!! when selecting a line adjust input values accordingly
 function onInit() {
     assignGlobalVars()
@@ -18,20 +18,21 @@ function onInit() {
     initListeners()
 }
 
-//I feel no need for comments here as the func names seem rather self explanetory
+
 function renderMeme(showSelector = true, combineLayers = false) {
     clearCanvas(gCtx)//resets main canvas, not background layer
     const meme = getMeme()
     const image = new Image()
     image.onload = () => {
+        resizeCanvas(image)
+        console.log(image)
         if (combineLayers) gCtx.drawImage(image, 0, 0)
-        gBgCtx.drawImage(image, 0, 0)
+        gBgCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
         meme.lines.forEach((line) => {
-            if (line.angle!=0) {
+            if (line.angle != 0) {
                 gCtx.save()
                 gCtx.rotate(Math.PI / 180 * line.angle, 0, 0)
                 drawText(line, gCtx)
-                // line.isRotated = false
                 gCtx.restore()
                 if (showSelector) renderSelector()
             } else {
@@ -62,9 +63,56 @@ function renderSelector() {//Draw rectangle around selected line, this'll be a h
     gCtx.stroke()
     gCtx.restore()
 }
-function clearCanvas(elContext) {// used for clearing selector
+function clearCanvas(elContext) {// used mainly for clearing selector
     elContext.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
 }
+function assignGlobalVars() {
+    gElCanvas = document.getElementById('canvas-editor')
+    gCtx = gElCanvas.getContext('2d')
+    gElBgCanvas = document.getElementById('canvas-background')
+    gBgCtx = gElBgCanvas.getContext('2d')
+    gElInputs = {
+        textBox: document.getElementById('linetext'),
+        colorPicker: document.getElementById('txtColorPicker')
+    }
+}
+function focusOnInput(elinput) {
+    window.setTimeout(() => elinput.focus(), 0)
+}
+function setInputValues() {
+    if (!getMeme().lines[getCurrentLineIdx()]) return
+    gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txt
+    gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].color
+}
+function resizeCanvas(image) {
+    const canvasContainer = document.querySelector('.canvas-container')
+    const aspectRatio = image.width > image.height ? image.width / image.height : image.height / image.width
+    const orientation = image.width > image.height ? 'landscape' : 'portrait'
+    let newWidth
+    let newHeight
+    if (orientation === 'landscape') {
+        newWidth = 500 * aspectRatio
+        newHeight = 500
+    } else {
+        newWidth = 500
+        newHeight = 500 * aspectRatio
+    }
+    gImageDimensions = { sWidth: newWidth, sHeight: newHeight }
+    gElCanvas.width = newWidth
+    gElBgCanvas.width = newWidth
+    gElCanvas.height = newHeight
+    gElBgCanvas.height = newHeight
+    canvasContainer.style.height = newHeight + 'px'
+    canvasContainer.style.width = newWidth + 'px'
+    console.log('aspectRatio :', aspectRatio)
+    console.log('image.width :', image.width)
+    console.log('image.height :', image.height)
+    console.log('orientation :', orientation)
+    // image.style.width = newWidth
+    // image.style.height = newHeight
+}
+
+//event driven
 function onMoveText(direction) {
     const moveAmount = 20
     switch (direction) {
@@ -92,7 +140,7 @@ function onTextChange(ev) {
     renderMeme()
 }
 function onImageChange(imgIdx) {
-    onNavLinkClick({ target: { innerText: 'editor' } })
+    onNavLinkClick({ target: { innerText: 'editor' } })//pretty proud of this hack ngl lol
     setMemeImage(imgIdx)
     renderMeme()
 }
@@ -123,21 +171,4 @@ function onSwitchLine() {
     renderMeme()
     focusOnInput(gElInputs.textBox)
 }
-function assignGlobalVars() {
-    gElCanvas = document.getElementById('canvas-editor')
-    gCtx = gElCanvas.getContext('2d')
-    gElBgCanvas = document.getElementById('canvas-background')
-    gBgCtx = gElBgCanvas.getContext('2d')
-    gElInputs = {
-        textBox: document.getElementById('linetext'),
-        colorPicker: document.getElementById('txtColorPicker')
-    }
-}
-function focusOnInput(elinput) {
-    window.setTimeout(() => elinput.focus(), 0)
-}
-function setInputValues(){
-    if(!getMeme().lines[getCurrentLineIdx()])return
-    gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txt
-    gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].color
-}
+

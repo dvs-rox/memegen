@@ -1,5 +1,5 @@
 'use strict'
-const gImgCount = 18
+const gImgCount = 21
 const gElGallery = document.querySelector('.gallery-container')
 function renderGallery() {
     let strHtml = ``
