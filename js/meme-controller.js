@@ -1,11 +1,16 @@
 'use strict'
 let gElCanvas
 let gCtx
+let gElBgCanvas
+let gBgCtx
+let gElInputs
 
 //TODO:!!! when selecting a line adjust input values accordingly
 function onInit() {
+    assignGlobalVars()
     renderGallery()
     gElCanvas = document.getElementById('canvas-editor')
+    gElBgCanvas = document.getElementById('canvas-background')
     gCtx = gElCanvas.getContext('2d')
     renderMeme()
     initListeners()
@@ -18,6 +23,7 @@ function renderMeme(showSelector = true) {
     const image = new Image()
     image.onload = () => {
         gCtx.drawImage(image, 0, 0)
+        gBgCtx.drawImage(image,0,0)
         meme.lines.forEach((line) => {
             drawText(line)
         });
@@ -27,15 +33,14 @@ function renderMeme(showSelector = true) {
 }
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
     const line = getMeme().lines[getCurrentLineIdx()]
-    if(!line)return
+    if (!line) return
     const padding = 4//used to determine padding of text inside 'border'
     const rectangle = {
         x: line.cornerCoords.x - padding / 2,
         y: line.cornerCoords.y - line.size / 2,
         xspan: line.txtWidth + padding,
-        yspan: line.size+padding
+        yspan: line.size + padding
     }
-    console.log(rectangle)
     gCtx.beginPath()
     gCtx.rect(rectangle.x, rectangle.y, rectangle.xspan, rectangle.yspan)
     gCtx.stroke()
@@ -90,8 +95,21 @@ function onFontSizeChange(val) {
 function onAddLine() {
     addLine()
     renderMeme()
+    focusOnInput(gElInputs.textBox)
 }
 function onSwitchLine() {
     renderMeme()
     scrollLineIndex()
+}
+function assignGlobalVars() {
+    gElCanvas = document.getElementById('canvas-editor')
+    gCtx = gElCanvas.getContext('2d')
+    gElBgCanvas = document.getElementById('canvas-background')
+    gBgCtx = gElBgCanvas.getContext('2d')
+    gElInputs = {
+        textBox: document.getElementById('linetext')
+    }
+}
+function focusOnInput(elinput) {
+    window.setTimeout(() => elinput.focus(), 0)
 }

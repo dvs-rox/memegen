@@ -26,8 +26,15 @@
     font-family: chakra;
     color: var(--clr-background-primary);
 }
-
-
+.editor-container canvas{
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.editor-container div:first-of-type{
+    width: 500px;
+    height: 500px;
+}
 
 input[name='linetext']{
     grid-area: textBox;

@@ -50,17 +50,11 @@ function drawText(line) {
     line.txt = line.txt.toUpperCase()
     gCtx.fillText(line.txt, line.cornerCoords.x, line.cornerCoords.y + line.size / 2)
     gCtx.strokeText(line.txt, line.cornerCoords.x, line.cornerCoords.y + line.size / 2)
-    // debugger
     line.txtWidth = gCtx.measureText(line.txt).width
-    console.log(line.txtWidth)
 }
 function moveText(xDiff = 0, yDiff = 0) {
     const line = gMeme.lines[gCurrentLineIndex]
-    console.log('cornerCoords.x :', line.cornerCoords.x)
-    console.log('cornerCoords.y :', line.cornerCoords.y)
     line.cornerCoords.x = line.cornerCoords.x + xDiff
     line.cornerCoords.y = line.cornerCoords.y + yDiff
-    console.log('cornerCoords.x :', line.cornerCoords.x)
-    console.log('cornerCoords.y :', line.cornerCoords.y)
-    drawText(line)
+    renderMeme()
 }

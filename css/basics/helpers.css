@@ -10,3 +10,6 @@
 .capitalize{
     text-transform: capitalize;
 }
+.position-relative{
+    position: relative;
+}

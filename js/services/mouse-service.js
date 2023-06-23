@@ -3,7 +3,16 @@ let gCursor = {
     x: 0,
     y: 0
 }
-
+let gDragInfo = {
+    initCoords: {
+        x: 0,
+        y: 0
+    },
+    nextCoords: {
+        x: 0,
+        y: 0
+    }
+}
 function initListeners() {
     gElCanvas.addEventListener('mousedown', _selectLineByCoords)
 }
@@ -20,9 +29,33 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
         }
     })
     if (lineIdx != -1) {
+        gDragInfo.initCoords = { x: gCursor.x, y: gCursor.y }
+        _enableLineDragging()
         setLineIndex(lineIdx)
+        focusOnInput(gElInputs.textBox)
         renderMeme()
     }
+}
+function _enableLineDragging() {
+    console.log('enable line dragging')
+    gElCanvas.addEventListener('mousemove', _repositionLine, false)
+    gElCanvas.addEventListener('mouseup', _disableLineDragging)
+}
+function _disableLineDragging() {
+    console.log('disable line dragging')
+    gElCanvas.removeEventListener('mousemove', _repositionLine, false)
+}
+function _repositionLine(event) {
+    gDragInfo.nextCoords = { x: event.offsetX, y: event.offsetY }
+    console.log(gDragInfo)
+    const xDiff = gDragInfo.nextCoords.x - gDragInfo.initCoords.x
+    const yDiff = gDragInfo.nextCoords.y - gDragInfo.initCoords.y
+    gDragInfo.initCoords = {
+        x: gDragInfo.nextCoords.x,
+        y: gDragInfo.nextCoords.y
+    }
+    // debugger
+    moveText(xDiff,yDiff)
 }
 //sets
 function _setCursorPosition(event) {//used only by event
