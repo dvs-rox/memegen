@@ -31,9 +31,9 @@ function renderMeme(showSelector = true, combineLayers = false) {
                 gCtx.save()
                 gCtx.rotate(Math.PI / 180 * line.angle, 0, 0)
                 drawText(line, gCtx)
-                if (showSelector) renderSelector()
                 // line.isRotated = false
                 gCtx.restore()
+                if (showSelector) renderSelector()
             } else {
                 drawText(line, gCtx)
                 if (showSelector) renderSelector()
@@ -53,9 +53,12 @@ function renderSelector() {//Draw rectangle around selected line, this'll be a h
         xspan: line.txtWidth + padding,
         yspan: line.size + padding
     }
+    gCtx.save()
+    gCtx.rotate(Math.PI / 180 * line.angle, 0, 0)
     gCtx.beginPath()
     gCtx.rect(rectangle.x, rectangle.y, rectangle.xspan, rectangle.yspan)
     gCtx.stroke()
+    gCtx.restore()
 }
 function clearCanvas(elContext) {// used for clearing selector
     elContext.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
