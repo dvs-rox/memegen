@@ -27,7 +27,7 @@ function renderMeme(showSelector = true, combineLayers = false) {
         if (combineLayers) gCtx.drawImage(image, 0, 0)
         gBgCtx.drawImage(image, 0, 0)
         meme.lines.forEach((line) => {
-            if (line.isRotated) {
+            if (line.angle!=0) {
                 gCtx.save()
                 gCtx.rotate(Math.PI / 180 * line.angle, 0, 0)
                 drawText(line, gCtx)
@@ -41,6 +41,8 @@ function renderMeme(showSelector = true, combineLayers = false) {
         });
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
+
+    setInputValues()
 }
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
     console.log('drawing selector')
@@ -117,8 +119,9 @@ function onAddLine() {
     focusOnInput(gElInputs.textBox)
 }
 function onSwitchLine() {
-    renderMeme()
     scrollLineIndex()
+    renderMeme()
+    focusOnInput(gElInputs.textBox)
 }
 function assignGlobalVars() {
     gElCanvas = document.getElementById('canvas-editor')
@@ -126,9 +129,15 @@ function assignGlobalVars() {
     gElBgCanvas = document.getElementById('canvas-background')
     gBgCtx = gElBgCanvas.getContext('2d')
     gElInputs = {
-        textBox: document.getElementById('linetext')
+        textBox: document.getElementById('linetext'),
+        colorPicker: document.getElementById('txtColorPicker')
     }
 }
 function focusOnInput(elinput) {
     window.setTimeout(() => elinput.focus(), 0)
+}
+function setInputValues(){
+    if(!getMeme().lines[getCurrentLineIdx()])return
+    gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txt
+    gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].color
 }

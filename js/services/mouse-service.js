@@ -37,12 +37,10 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
     }
 }
 function _enableLineDragging() {
-    // console.log('enable line dragging')
     gElCanvas.addEventListener('mousemove', _repositionLine, false)
     gElCanvas.addEventListener('mouseup', _disableLineDragging)
 }
 function _disableLineDragging() {
-    // console.log('disable line dragging')
     gElCanvas.removeEventListener('mousemove', _repositionLine, false)
 }
 function _repositionLine(event) {

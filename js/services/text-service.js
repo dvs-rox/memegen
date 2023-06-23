@@ -1,45 +1,5 @@
 'use strict'
 
-// function drawText(line, lineIdx) {//deprecated, to be replaced
-//     gCtx.strokeStyle = 'Black'
-//     gCtx.fillStyle = line.color
-//     gCtx.font = `${line.size}px Impact`
-//     gCtx.textAlign = 'center'
-//     gCtx.textBaseLine = 'middle'
-//     // TODO: figure out line breaks!
-
-//     line.txt = line.txt.toUpperCase()
-
-//     // switch (lineIdx) {
-//     //     case 0: {
-//     //         line.txtWidth = gCtx.measureText(line.txt).width
-//     //         line.cornerCoords = {
-//     //             x: (gElCanvas.width - line.txtWidth) / 2,
-//     //             y: line.size / 10// idk why this works lmao (magic number)
-//     //         }
-//     //         break;
-//     //     }
-//     //     case 1: {
-//     //         line.txtWidth = gCtx.measureText(line.txt).width
-//     //         line.cornerCoords = {
-//     //             x: (gElCanvas.width - line.txtWidth) / 2,
-//     //             y: gElCanvas.height - line.size * 1.4// idk why this works lmao (magic number)
-//     //         }
-
-//     //         break;
-//     //     }
-//     //     default: {
-//     //         line.txtWidth = gCtx.measureText(line.txt).width
-//     //         line.cornerCoords = {
-//     //             x: (gElCanvas.width - line.txtWidth) / 2,
-//     //             y: gElCanvas.height / 2 - line.size// idk why this works lmao (magic number)
-//     //         }
-//     //         break;
-//     //     }
-//     // }
-//     // debugger
-//     drawTextByCorner(line)
-// }
 function drawText(line, context) {
 
     // clearCanvas(context)

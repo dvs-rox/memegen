@@ -31,7 +31,7 @@
                 <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)"
                     onload="this.focus()">
                 <input name="txtColorPicker" id="txtColorPicker" title="color picker for text color of current line"
-                    type="color" oninput="onColorChange(event)">
+                    type="color" oninput="onColorChange(event);this.value='#ffffff'" ">
                 <button name='rotateIncrease' onclick="onRotateText(+5)">rotate+</button>
                 <button name='rotateDecrease' onclick="onRotateText(-5)">rotate-</button>
                 <button name="txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">increase font
