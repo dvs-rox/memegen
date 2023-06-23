@@ -1,6 +1,8 @@
 'use strict'
+//foreground canvas
 let gElCanvas
 let gCtx
+//background canvas
 let gElBgCanvas
 let gBgCtx
 let gElInputs
@@ -17,17 +19,23 @@ function onInit() {
 }
 
 //I feel no need for comments here as the func names seem rather self explanetory
-function renderMeme(showSelector = true) {
-    clearCanvas()//reset canvas, I suspect this absolutely sucks since it has to load everytime
+function renderMeme(showSelector = true, combineLayers = false) {
+    clearCanvas(gCtx)//resets main canvas, not background layer
     const meme = getMeme()
     const image = new Image()
     image.onload = () => {
-        gCtx.drawImage(image, 0, 0)
-        gBgCtx.drawImage(image,0,0)
+        if (combineLayers) gCtx.drawImage(image, 0, 0)
+        gBgCtx.drawImage(image, 0, 0)
         meme.lines.forEach((line) => {
-            drawText(line)
+            if (line.isRotated) {
+                gCtx.save()
+                gCtx.rotate(Math.PI /180*line.angle, 0, 0)
+                drawText(line, gCtx)
+                if (showSelector) renderSelector()
+                // line.isRotated = false
+                gCtx.restore()
+            }else drawText(line,gCtx)
         });
-        if (showSelector) renderSelector()
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
 }
@@ -45,8 +53,8 @@ function renderSelector() {//Draw rectangle around selected line, this'll be a h
     gCtx.rect(rectangle.x, rectangle.y, rectangle.xspan, rectangle.yspan)
     gCtx.stroke()
 }
-function clearCanvas() {// used for clearing selector
-    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
+function clearCanvas(elContext) {// used for clearing selector
+    elContext.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
 }
 function onMoveText(direction) {
     const moveAmount = 20
@@ -66,6 +74,10 @@ function onMoveText(direction) {
     }
     renderMeme()
 }
+function onRotateText(diff) {
+    rotateText(diff)
+    renderMeme()
+}
 function onTextChange(ev) {
     setLineText(ev.target.value)
     renderMeme()
@@ -80,7 +92,7 @@ function onColorChange(ev) {
     renderMeme()
 }
 function onDownloadImage(ev) {//TODO: make sure the selector is removed before downloading!!
-    renderMeme(false)
+    renderMeme(false, true)
     setTimeout(() => {
         const elLink = ev.target
         const imgContent = gElCanvas.toDataURL('image/jpg')

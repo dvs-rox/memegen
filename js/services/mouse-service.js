@@ -47,7 +47,6 @@ function _disableLineDragging() {
 }
 function _repositionLine(event) {
     gDragInfo.nextCoords = { x: event.offsetX, y: event.offsetY }
-    console.log(gDragInfo)
     const xDiff = gDragInfo.nextCoords.x - gDragInfo.initCoords.x
     const yDiff = gDragInfo.nextCoords.y - gDragInfo.initCoords.y
     gDragInfo.initCoords = {

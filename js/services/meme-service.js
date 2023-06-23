@@ -14,6 +14,8 @@ function addLine(text = 'add text here :DDDD') {
     gMeme.lines.push({
         txt: text,
         size: 40,
+        angle: 0,
+        isRotated:false,
         color: 'white',
         cornerCoords: {
             x: gElCanvas.width / 2 - gCtx.measureText(text).width,
