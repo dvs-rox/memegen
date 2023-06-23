@@ -11,6 +11,7 @@ let gImageDimensions
 function onInit() {
     assignGlobalVars()
     renderGallery()
+    initMeme()
     gElCanvas = document.getElementById('canvas-editor')
     gElBgCanvas = document.getElementById('canvas-background')
     gCtx = gElCanvas.getContext('2d')
@@ -25,8 +26,7 @@ function renderMeme(showSelector = true, combineLayers = false) {
     const image = new Image()
     image.onload = () => {
         resizeCanvas(image)
-        console.log(image)
-        if (combineLayers) gCtx.drawImage(image, 0, 0)
+        if (combineLayers) gCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
         gBgCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
         meme.lines.forEach((line) => {
             if (line.angle != 0) {
@@ -42,19 +42,18 @@ function renderMeme(showSelector = true, combineLayers = false) {
         });
     }
     image.src = `./img/templates/${meme.selectedImgId}.jpg`
-
-    setInputValues()
+    focusOnInput(gElInputs.textBox)
+    // setInputValues()
 }
-function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
-    console.log('drawing selector')
+function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell(it was)
     const line = getMeme().lines[getCurrentLineIdx()]
     if (!line) return
     const padding = 4//used to determine padding of text inside 'border'
     const rectangle = {
-        x: line.cornerCoords.x - padding / 2,
-        y: line.cornerCoords.y - line.size / 2,
-        xspan: line.txtWidth + padding,
-        yspan: line.size + padding
+        x: line.cornerCoords.x - padding,
+        y: line.cornerCoords.y - line.fontAtts.size,
+        xspan: line.txtWidth/2+padding,
+        yspan: line.txtHeight
     }
     gCtx.save()
     gCtx.rotate(Math.PI / 180 * line.angle, 0, 0)
@@ -81,7 +80,7 @@ function focusOnInput(elinput) {
 }
 function setInputValues() {
     if (!getMeme().lines[getCurrentLineIdx()]) return
-    gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txt
+    gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txts.join(' ')
     gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].color
 }
 function resizeCanvas(image) {
@@ -92,7 +91,7 @@ function resizeCanvas(image) {
     let newHeight
     if (orientation === 'landscape') {
         newWidth = 500 * aspectRatio
-        newHeight = 500
+        newHeight = 600
     } else {
         newWidth = 500
         newHeight = 500 * aspectRatio
@@ -104,12 +103,6 @@ function resizeCanvas(image) {
     gElBgCanvas.height = newHeight
     canvasContainer.style.height = newHeight + 'px'
     canvasContainer.style.width = newWidth + 'px'
-    console.log('aspectRatio :', aspectRatio)
-    console.log('image.width :', image.width)
-    console.log('image.height :', image.height)
-    console.log('orientation :', orientation)
-    // image.style.width = newWidth
-    // image.style.height = newHeight
 }
 
 //event driven
@@ -145,17 +138,21 @@ function onImageChange(imgIdx) {
     renderMeme()
 }
 function onColorChange(ev) {
+    console.log(ev.target.value)
     setTextColor(ev.target.value)
     renderMeme()
 }
-function onDownloadImage(ev) {//TODO: make sure the selector is removed before downloading!!
+function onDownloadImage(ev) {
     renderMeme(false, true)
+    const elLink = ev.target
     setTimeout(() => {
-        const elLink = ev.target
         const imgContent = gElCanvas.toDataURL('image/jpg')
         elLink.href = imgContent
-        ev.href = self.href
-    }, 500);
+        // ev.href = self.href
+    }, 300);
+    setTimeout(() => {
+        ev.target.href
+    }, 300);
 }
 function onFontSizeChange(val) {
     setTextSize(val)

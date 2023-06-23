@@ -5,7 +5,7 @@
     grid-column: 2;
     justify-self: center;
     display: grid;
-    grid-template-columns: 500px 300px;
+    grid-template-columns: auto 300px;
     grid-template-rows: 1fr auto;
     gap: 20px;
     background: linear-gradient(140deg , var(--clr-background-secondary), var(--clr-background-primary));

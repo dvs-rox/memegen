@@ -17,13 +17,14 @@ function initListeners() {
     gElCanvas.addEventListener('mousedown', _selectLineByCoords)
 }
 function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
+    // debugger
     _setCursorPosition(event)
     const meme = getMeme()//get meme to iterate and get all line ranges
     const lineIdx = meme.lines.findIndex((line) => {
         const xStart = line.cornerCoords.x
         const xEnd = line.cornerCoords.x + line.txtWidth
-        const yStart = line.cornerCoords.y - line.size/2
-        const yEnd = line.cornerCoords.y + line.size/2
+        const yStart = line.cornerCoords.y - line.txtHeight/2
+        const yEnd = line.cornerCoords.y + line.txtHeight/2
         if (gCursor.x > xStart && gCursor.x < xEnd && gCursor.y > yStart && gCursor.y < yEnd) {
             return line
         }
@@ -35,13 +36,14 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
         focusOnInput(gElInputs.textBox)
         renderMeme()
     }
+
 }
 function _enableLineDragging() {
-    gElCanvas.addEventListener('mousemove', _repositionLine, false)
+    gElCanvas.addEventListener('mousemove', _repositionLine)
     gElCanvas.addEventListener('mouseup', _disableLineDragging)
 }
 function _disableLineDragging() {
-    gElCanvas.removeEventListener('mousemove', _repositionLine, false)
+    gElCanvas.removeEventListener('mousemove', _repositionLine)
 }
 function _repositionLine(event) {
     gDragInfo.nextCoords = { x: event.offsetX, y: event.offsetY }
@@ -51,7 +53,6 @@ function _repositionLine(event) {
         x: gDragInfo.nextCoords.x,
         y: gDragInfo.nextCoords.y
     }
-    // debugger
     moveText(xDiff,yDiff)
 }
 //sets

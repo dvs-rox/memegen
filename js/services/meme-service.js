@@ -1,53 +1,43 @@
 'use strict'
 //note: please feel free to ignore the silly flavour text in some comments, it is for my own amusement
 var gImgs = []
-var gMeme = {
-    selectedImgId: 5,
-    selectedLineIdx: 0,
-    lines: [],
-    txtWidth: 20
+// var gMeme = {
+//     selectedImgId: 5,
+//     selectedLineIdx: 0,
+//     lines: [],
+//     txtWidth: 20
+// }
+var gMeme = { //refactor to string array for each row,
+    // selectedImgId: 5,
+    // selectedLineIdx: 0,
+    // lines: [{
+    //     txtWidth: 30,
+    //     lineBreak: 5,
+    //     cornerCoords: {
+    //         x: gElCanvas.width / 2 - gCtx.measureText(text).width,//measureText to only filter longest string
+    //         y: gElCanvas.height / 2
+    //     },
+    //     txts: ['text me'],
+    //     fontAtts: {
+    //         strokeColor: 'black',
+    //         color: 'white',
+    //         size: 40,
+    //         align: 'left',
+    //         baseLine: 'top'
+    //     }
+    // }]
+}
+function initMeme() {
+    gMeme = { //refactor to string array for each row,
+        selectedImgId: 5,
+        selectedLineIdx: 0,
+        lines: []
+    }
 }
 let gCurrentLineIndex = 0
 var gKeywordSearchCountMap
 
-function addLine(text = 'add text here :DDDD') {
-    gMeme.lines.push({
-        txt: text,
-        size: 40,
-        angle: 0,
-        isRotated:false,
-        color: 'white',
-        cornerCoords: {
-            x: gElCanvas.width / 2 - gCtx.measureText(text).width,
-            y: gElCanvas.height / 2
-        },
-        txtWidth: gCtx.measureText(text).width
-    })
-    gCurrentLineIndex = gMeme.lines.length - 1
-    // const currentLine = gMeme.lines[gCurrentLineIndex]
-    // switch (gCurrentLineIndex) {
-    //     case 0:
-    //         currentLine.cornerCoords = {
-    //             x: (gElCanvas.width - currentLine.txtWidth) / 2,
-    //             y: currentLine.size / 10// idk why this works lmao (magic number)
-    //         }
-    //         break
-    //     case 1:
-    //         currentLine.cornerCoords = {
-    //             x: (gElCanvas.width - currentLine.txtWidth) / 2,
-    //             y: gElCanvas.height - currentLine.size * 1.4// idk why this works lmao (magic number)
-    //         }
-    //         break
-    //     default:
-    //         currentLine.cornerCoords = {
-    //             x: (gElCanvas.width - currentLine.txtWidth) / 2,
-    //             y: gElCanvas.height / 2 - currentLine.size// idk why this works lmao (magic number)
-    //         }
-    //         break
 
-    // }
-    renderMeme()
-}
 function scrollLineIndex() {
     (gCurrentLineIndex + 1 >= gMeme.lines.length) ? setLineIndex(0) : setLineIndex(gCurrentLineIndex + 1)
 }
@@ -61,13 +51,15 @@ function getCurrentLineIdx() {
 }
 //SETS (only sets I get in lol)
 function setLineText(text, lineIdx = gCurrentLineIndex) {
-    gMeme.lines[lineIdx].txt = text
+    const line = gMeme.lines[lineIdx]
+    line.txt = text
+    updateTxtWidth()
 }
 function setMemeImage(imageIdx) {
     gMeme.selectedImgId = imageIdx
 }
-function setTextColor(color, line = gCurrentLineIndex) {
-    gMeme.lines[line].color = color
+function setTextColor(color, lineIdx = gCurrentLineIndex) {
+    gMeme.lines[lineIdx].fontAtts.color = color
 }
 function setTextSize(sizeDiff, line = gCurrentLineIndex) {
     if (gMeme.lines[line].size + sizeDiff < 20) return
