@@ -18,8 +18,8 @@ function renderMeme(showSelector = true) {
     const image = new Image()
     image.onload = () => {
         gCtx.drawImage(image, 0, 0)
-        meme.lines.forEach((line, lineIdx) => {
-            drawText(line, lineIdx)
+        meme.lines.forEach((line) => {
+            drawText(line)
         });
         if (showSelector) renderSelector()
     }
@@ -27,59 +27,39 @@ function renderMeme(showSelector = true) {
 }
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell
     const line = getMeme().lines[getCurrentLineIdx()]
+    if(!line)return
     const padding = 4//used to determine padding of text inside 'border'
+    const rectangle = {
+        x: line.cornerCoords.x - padding / 2,
+        y: line.cornerCoords.y - line.size / 2,
+        xspan: line.txtWidth + padding,
+        yspan: line.size+padding
+    }
+    console.log(rectangle)
     gCtx.beginPath()
-    gCtx.rect(line.cornerCoords.x - padding / 2, line.cornerCoords.y, line.txtWidth + padding, line.size)
+    gCtx.rect(rectangle.x, rectangle.y, rectangle.xspan, rectangle.yspan)
     gCtx.stroke()
 }
 function clearCanvas() {// used for clearing selector
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
 }
-function drawText(line, lineIdx) {
-    gCtx.strokeStyle = 'Black'
-    gCtx.fillStyle = line.color
-    gCtx.font = `${line.size}px Impact`
-    gCtx.textAlign = 'center'
-    gCtx.textBaseLine = 'middle'
-    // TODO: figure out line breaks!
-
-    line.txt = line.txt.toUpperCase()
-    switch (lineIdx) {
-        case 0: {
-            gCtx.fillText(line.txt, gElCanvas.width / 2, line.size)
-            gCtx.strokeText(line.txt, gElCanvas.width / 2, line.size)
-            //setting params for selector
-            line.txtWidth = gCtx.measureText(line.txt).width
-            line.cornerCoords = {
-                x: (gElCanvas.width - line.txtWidth) / 2,
-                y: line.size / 10// idk why this works lmao (magic number)
-            }
-            break;
-        }
-        case 1: {
-            gCtx.fillText(line.txt, gElCanvas.width / 2, gElCanvas.height - line.size / 2)
-            gCtx.strokeText(line.txt, gElCanvas.width / 2, gElCanvas.height - line.size / 2)
-            //setting params for selector
-            line.txtWidth = gCtx.measureText(line.txt).width
-            line.cornerCoords = {
-                x: (gElCanvas.width - line.txtWidth) / 2,
-                y: gElCanvas.height - line.size * 1.4// idk why this works lmao (magic number)
-            }
-
-            break;
-        }
-        default: {
-            gCtx.fillText(line.txt, gElCanvas.width / 2, gElCanvas.height / 2)
-            gCtx.strokeText(line.txt, gElCanvas.width / 2, gElCanvas.height / 2)
-            line.txtWidth = gCtx.measureText(line.txt).width
-            line.cornerCoords = {
-                x: (gElCanvas.width - line.txtWidth) / 2,
-                y: gElCanvas.height / 2 - line.size// idk why this works lmao (magic number)
-            }
-            break;
-        }
+function onMoveText(direction) {
+    const moveAmount = 20
+    switch (direction) {
+        case 'up':
+            moveText(0, -moveAmount)
+            break
+        case 'down':
+            moveText(0, moveAmount)
+            break
+        case 'left':
+            moveText(-moveAmount, 0)
+            break
+        case 'right':
+            moveText(moveAmount, 0)
+            break
     }
-
+    renderMeme()
 }
 function onTextChange(ev) {
     setLineText(ev.target.value)

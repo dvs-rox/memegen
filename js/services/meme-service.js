@@ -4,28 +4,8 @@ var gImgs = []
 var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
-    lines: [
-        {
-            txt: `Top text`,
-            txtWidth:null,
-            size: 40,
-            color: 'white',
-            cornerCoords:{
-                x:null,
-                y:null
-            }
-        },
-        {
-            txt: `Bottom text`,
-            txtWidth:null,
-            size: 40,
-            color: 'white',
-            cornerCoords:{
-                x:null,
-                y:null
-            }
-        }
-    ]
+    lines: [],
+    txtWidth: 20
 }
 let gCurrentLineIndex = 0
 var gKeywordSearchCountMap
@@ -34,18 +14,47 @@ function addLine(text = 'add text here :DDDD') {
     gMeme.lines.push({
         txt: text,
         size: 40,
-        color: 'white'
+        color: 'white',
+        cornerCoords: {
+            x: gElCanvas.width / 2 - gCtx.measureText(text).width,
+            y: gElCanvas.height / 2
+        },
+        txtWidth: gCtx.measureText(text).width
     })
+    gCurrentLineIndex = gMeme.lines.length - 1
+    // const currentLine = gMeme.lines[gCurrentLineIndex]
+    // switch (gCurrentLineIndex) {
+    //     case 0:
+    //         currentLine.cornerCoords = {
+    //             x: (gElCanvas.width - currentLine.txtWidth) / 2,
+    //             y: currentLine.size / 10// idk why this works lmao (magic number)
+    //         }
+    //         break
+    //     case 1:
+    //         currentLine.cornerCoords = {
+    //             x: (gElCanvas.width - currentLine.txtWidth) / 2,
+    //             y: gElCanvas.height - currentLine.size * 1.4// idk why this works lmao (magic number)
+    //         }
+    //         break
+    //     default:
+    //         currentLine.cornerCoords = {
+    //             x: (gElCanvas.width - currentLine.txtWidth) / 2,
+    //             y: gElCanvas.height / 2 - currentLine.size// idk why this works lmao (magic number)
+    //         }
+    //         break
+
+    // }
+    renderMeme()
 }
 function scrollLineIndex() {
-    (gCurrentLineIndex+1 >= gMeme.lines.length) ?  setLineIndex(0) : setLineIndex(gCurrentLineIndex + 1)
+    (gCurrentLineIndex + 1 >= gMeme.lines.length) ? setLineIndex(0) : setLineIndex(gCurrentLineIndex + 1)
 }
 
 //GETS
 function getMeme() {
     return gMeme
 }
-function getCurrentLineIdx(){
+function getCurrentLineIdx() {
     return gCurrentLineIndex
 }
 //SETS (only sets I get in lol)

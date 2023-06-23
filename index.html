@@ -34,6 +34,10 @@
                     size</button>
                 <button name="addLine" title="add line" onclick="onAddLine()">add line</button>
                 <button name="switchLine" title="switch line" onclick="onSwitchLine()">switch line</button>
+                <button name="moveLeft" onclick="onMoveText('left')">left</button>
+                <button name="moveRight" onclick="onMoveText('right')">right</button>
+                <button name="moveUp" onclick="onMoveText('up')">up</button>
+                <button name="moveDown" onclick="onMoveText('down')">down</button>
             </div>
 
             <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)" download="my meme.jpg">download image</a>
@@ -45,6 +49,7 @@
     <script src="js/services/mouse-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/navbar-controller.js"></script>
+    <script src="js/services/text-service.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
 
