@@ -13,8 +13,8 @@ function addLine(text) {
         txt: 'text me please',
         txts: ['text me please'],
         fontAtts: {
-            strokeColor: 'black',
-            color: 'white',
+            strokeColor: '#000000',
+            color: '#FFFFFF',
             size: 40,
             align: 'left',
             baseLine: 'top',

@@ -36,12 +36,9 @@ function initMeme() {
 }
 let gCurrentLineIndex = 0
 var gKeywordSearchCountMap
-
-
 function scrollLineIndex() {
     (gCurrentLineIndex + 1 >= gMeme.lines.length) ? setLineIndex(0) : setLineIndex(gCurrentLineIndex + 1)
 }
-
 //GETS
 function getMeme() {
     return gMeme

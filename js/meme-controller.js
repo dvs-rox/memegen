@@ -99,7 +99,9 @@ function focusOnInput(elinput) {
 function setInputValues() {
     if (!getMeme().lines[getCurrentLineIdx()]) return
     gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txts.join(' ')
-    gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].color
+    console.log(getMeme().lines[getCurrentLineIdx()].fontAtts.color)
+    console.log(gElInputs.colorPicker)
+    gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].fontAtts.color
 }
 function resizeCanvas(image) {
     const canvasContainer = document.querySelector('.canvas-container')

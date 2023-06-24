@@ -12,6 +12,11 @@
         grid-column: 1;
         grid-row: 2;
     }
+    div[name='txtColorPickerContainer'] i{
+        position: absolute;
+        top:10%;
+        left: 30%;
+    }
     .editor-container a {
         grid-column: 1;
         grid-row: 3;
