@@ -10,6 +10,7 @@
     background: linear-gradient(140deg, var(--clr-background-secondary), var(--clr-background-primary));
     box-shadow: 1rem 1rem 0 var(--clr-background-primary);
     padding: 1.5rem;
+    border: 2px #b420a851 solid;
     border-radius: 2rem;
 }
 
@@ -23,6 +24,7 @@
         "addLine switchLine removeLine"
         "rotateIncrease moveUp rotateDecrease"
         "moveLeft moveDown moveRight";
+    gap: 5px;
 }
 
 .editor-container a {
@@ -45,18 +47,31 @@
 .canvas-editor {
     cursor: grab;
 }
+.editor-controls button i{
+    padding-block: 1rem;
+}
 
 input[name='linetext'] {
     grid-area: textBox;
     height: 2rem;
 }
 
-input[name='txtColorPicker'] {
+div[name='txtColorPickerContainer'] {
+    position: relative;
     grid-area: colorPicker;
     justify-self: center;
     align-self: center;
+    width: 100%;
+    height: 100%;
 }
-
+div[name='txtColorPickerContainer'] input{
+    width: 100%;
+    height: 100%;
+}
+div[name='txtColorPickerContainer'] i{
+    margin: auto;
+    position: absolute;
+}
 input[name='imgDownload'] {
     grid-area: downloadLink;
 }
