@@ -26,13 +26,21 @@
         "moveLeft moveDown moveRight";
     gap: 5px;
 }
-
-.editor-container a {
+.editor-container a{
     font-size: 2rem;
     font-family: chakra;
+    text-transform: capitalize;
+    width: fit-content;
+    text-shadow: var(--clr-font-shadow-primary) 3px 3px  20px;
     color: var(--clr-background-primary);
 }
+.editor-container a:first-of-type {
+    font-size: 2rem;
+    font-family: chakra;
+}
+.editor-container a:last-of-type{
 
+}
 .editor-container canvas {
     position: absolute;
     left: 0;

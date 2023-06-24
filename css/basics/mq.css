@@ -5,7 +5,6 @@
         grid-template-columns:10px 1fr 1px;
     }
     .editor-container{
-        /* height: 600px; */    
         grid-template-columns: auto;
     }
     .editor-controls {
@@ -17,9 +16,16 @@
         top:10%;
         left: 30%;
     }
-    .editor-container a {
+    .editor-container a:first-of-type {
         grid-column: 1;
         grid-row: 3;
+        font-size: 2rem;
+        font-family: chakra;
+        color: var(--clr-background-primary);
+    }
+    .editor-container a:last-of-type {
+        grid-column: 1;
+        grid-row: 4;
         font-size: 2rem;
         font-family: chakra;
         color: var(--clr-background-primary);
