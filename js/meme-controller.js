@@ -18,15 +18,16 @@ function onInit() {
     renderMeme()
     initListeners()
 }
-
-
 function renderMeme(showSelector = true, combineLayers = false) {
     clearCanvas(gCtx)//resets main canvas, not background layer
     const meme = getMeme()
     const image = new Image()
     image.onload = () => {
         resizeCanvas(image)
-        if (combineLayers) gCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
+        if (combineLayers){
+            console.log('squishing layers')
+            gCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
+        } 
         gBgCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
         meme.lines.forEach((line) => {
             if (line.angle != 0) {
@@ -174,7 +175,6 @@ function onDownloadImage(ev) {
     setTimeout(() => {
         const imgContent = gElCanvas.toDataURL('image/jpg')
         elLink.href = imgContent
-        // ev.href = self.href
     }, 300);
     setTimeout(() => {
         ev.target.href
@@ -199,4 +199,6 @@ function onSwitchLine() {
     renderMeme()
     focusOnInput(gElInputs.textBox)
 }
-
+function onShareToFacebook(){
+    getDataUrl()//bad name, no time to organize
+}

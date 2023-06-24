@@ -59,6 +59,7 @@ function updateRows(line = getMeme().lines[gCurrentLineIndex]) {
     }
 }
 function setLineText(text, lineIdx = gCurrentLineIndex) {
+    if(!getMeme().lines[lineIdx])addLine('add text here')
     const line = getMeme().lines[lineIdx]
     updateTextWidth()
     line.txt = text
