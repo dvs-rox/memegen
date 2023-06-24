@@ -5,6 +5,7 @@ function onNavLinkClick(ev) {
     const selectedLink = ev.target
     cleanNavBar()
     hideAllSections()
+    ev.target.classList.add('selected')
     switch (selectedLink.innerText.toLowerCase()) {
         case 'editor':
             gElEditor.style= ''

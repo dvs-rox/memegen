@@ -14,7 +14,7 @@
             <nav class="nav-container flex space-between">
                 <h1 class="capitalize neon-text-shadow" title="but make it vaporwave">meme generator</h1>
                 <ul class="clean-list capitalize flex space-between">
-                    <li><a href="#" onclick="onNavLinkClick(event)" class="selected">editor</a></li>
+                    <li><a href="#" id="editorLink" onclick="onNavLinkClick(event)" class="selected">editor</a></li>
                     <li><a href="#" onclick="onNavLinkClick(event)">gallery</a></li>
                     <li><a href="#" onclick="onNavLinkClick(event)">about</a></li>
                 </ul>
@@ -30,19 +30,21 @@
             <div class="editor-controls">
                 <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)"
                     onload="this.focus()">
-                <input name="txtColorPicker" id="txtColorPicker" title="color picker for text color of current line"
-                    type="color" oninput="onColorChange(event)" ">
-                <button name='rotateIncrease' onclick="onRotateText(+5)">rotate+</button>
-                <button name='rotateDecrease' onclick="onRotateText(-5)">rotate-</button>
-                <button name="txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">increase font
+                <input min="1" max="15" type="range" name="lineWrap" id="lineWrap" oninput="onSetLineWrap(event)" >
+                <button name=" txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">increase font
                     size</button>
                 <button name="txtDecrease" title="decrease font size" onclick="onFontSizeChange(-4)">decrease font
                     size</button>
-                <button name="addLine" title="add line" onclick="onAddLine()">add line</button>
+                <input name="txtColorPicker" id="txtColorPicker" title="color picker for text color of current line"
+                    type="color" oninput="onColorChange(event)" ">
+                <button name=" addLine" title="add line" onclick="onAddLine()">add line</button>
                 <button name="switchLine" title="switch line" onclick="onSwitchLine()">switch line</button>
+                <button name="removeLine" title="add line" onclick="onRemoveLine()">remove line</button>
+                <button name='rotateIncrease' onclick="onRotateText(+5)">rotate+</button>
+                <button name="moveUp" onclick="onMoveText('up')">up</button>
+                <button name='rotateDecrease' onclick="onRotateText(-5)">rotate-</button>
                 <button name="moveLeft" onclick="onMoveText('left')">left</button>
                 <button name="moveRight" onclick="onMoveText('right')">right</button>
-                <button name="moveUp" onclick="onMoveText('up')">up</button>
                 <button name="moveDown" onclick="onMoveText('down')">down</button>
             </div>
 

@@ -1,0 +1,39 @@
+/* mobile */
+@media(max-width:800px){ 
+    .main-layout{
+        display: grid;
+        grid-template-columns:10px 1fr 1px;
+    }
+    .editor-container{
+        /* height: 600px; */    
+        grid-template-columns: auto;
+    }
+    .editor-controls {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .editor-container a {
+        grid-column: 1;
+        grid-row: 3;
+        font-size: 2rem;
+        font-family: chakra;
+        color: var(--clr-background-primary);
+    }
+    header{
+        margin-block-end: 10px;
+    }
+    header nav{
+        margin-inline:10px;
+    }
+    header nav h1{
+        font-size: 1.5rem;
+    }
+}
+/* tablet */
+@media(max-width:800px){
+
+}
+/* pc */
+@media(max-width:800px){
+
+}

@@ -52,7 +52,7 @@ function renderSelector() {//Draw rectangle around selected line, this'll be a h
     const rectangle = {
         x: line.cornerCoords.x - padding,
         y: line.cornerCoords.y - line.fontAtts.size,
-        xspan: line.txtWidth/2+padding,
+        xspan: line.txtWidth + padding,
         yspan: line.txtHeight
     }
     gCtx.save()
@@ -61,6 +61,20 @@ function renderSelector() {//Draw rectangle around selected line, this'll be a h
     gCtx.rect(rectangle.x, rectangle.y, rectangle.xspan, rectangle.yspan)
     gCtx.stroke()
     gCtx.restore()
+}
+function drawText(line, context) {
+    const rows = line.txts
+    const padding = 2
+    setContextAttributes(line, context)
+
+    let txtHeight = padding
+    rows.forEach(row => {
+        context.wordSpacing = '700px'
+        context.fillText(row, line.cornerCoords.x, line.cornerCoords.y + txtHeight)
+        context.strokeText(row, line.cornerCoords.x, line.cornerCoords.y + txtHeight)
+        txtHeight += line.fontAtts.size + padding
+    })
+    line.txtHeight = txtHeight
 }
 function clearCanvas(elContext) {// used mainly for clearing selector
     elContext.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
@@ -72,8 +86,12 @@ function assignGlobalVars() {
     gBgCtx = gElBgCanvas.getContext('2d')
     gElInputs = {
         textBox: document.getElementById('linetext'),
-        colorPicker: document.getElementById('txtColorPicker')
+        colorPicker: document.getElementById('txtColorPicker'),
+        lineWrap: document.getElementById('lineWrap')
     }
+
+    gElInputs.lineWrap.value = 5
+    gElInputs.lineWrap.title = `wrap every ${gElInputs.lineWrap.value} words`
 }
 function focusOnInput(elinput) {
     window.setTimeout(() => elinput.focus(), 0)
@@ -132,8 +150,15 @@ function onTextChange(ev) {
     setLineText(ev.target.value)
     renderMeme()
 }
+function onSetLineWrap(ev) {
+    setLineWrap(ev.target.value)
+    ev.target.title = `wrap every ${getMeme().lines[getCurrentLineIdx()].lineBreak} words`
+    updateRows()
+    updateTextWidth()
+    renderMeme()
+}
 function onImageChange(imgIdx) {
-    onNavLinkClick({ target: { innerText: 'editor' } })//pretty proud of this hack ngl lol
+    onNavLinkClick({ target: document.getElementById('editorLink')})//pretty proud of this hack ngl lol
     setMemeImage(imgIdx)
     renderMeme()
 }
@@ -160,7 +185,12 @@ function onFontSizeChange(val) {
 function onAddLine() {
     addLine()
     renderMeme()
+    setInputValues()
     focusOnInput(gElInputs.textBox)
+}
+function onRemoveLine() {
+    removeLine()
+    renderMeme()
 }
 function onSwitchLine() {
     scrollLineIndex()

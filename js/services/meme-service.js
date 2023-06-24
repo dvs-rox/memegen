@@ -54,13 +54,7 @@ function getCurrentLineIdx() {
 function setMemeImage(imageIdx) {
     gMeme.selectedImgId = imageIdx
 }
-function setTextColor(color, lineIdx = gCurrentLineIndex) {
-    gMeme.lines[lineIdx].fontAtts.color = color
-}
-function setTextSize(sizeDiff, line = gCurrentLineIndex) {
-    if (gMeme.lines[line].size + sizeDiff < 20) return
-    gMeme.lines[line].size += sizeDiff
-}
+
 function setLineIndex(val) {
     gCurrentLineIndex = val
 }
