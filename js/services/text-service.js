@@ -1,17 +1,17 @@
 'use strict'
 
-function addLine(text) {
+function addLine(text='enter text here',initialCoords={x:0,y:gElCanvas.height / 2}) {
     gMeme.lines.push({
         txtWidth: 0,
         txtHeight: 0,
         lineBreak: 5,
         cornerCoords: {
-            x: 0,//measureText to only filter longest string
-            y: gElCanvas.height / 2
+            x: initialCoords.x,//measureText to only filter longest string
+            y: initialCoords.y
         },
         angle: 0,
-        txt: 'text me please',
-        txts: ['text me please'],
+        txt: text,
+        txts: [text],
         fontAtts: {
             strokeColor: '#000000',
             color: '#FFFFFF',
@@ -38,7 +38,7 @@ function updateTextWidth(line = getMeme().lines[gCurrentLineIndex]) {
         if (ctx.measureText(row).width > ctx.measureText(longest).width) longest = row
     })
     console.log('longest:', longest)
-    line.txtWidth = ctx.measureText(longest).width+line.fontAtts.size
+    line.txtWidth = ctx.measureText(longest).width
 }
 function setContextAttributes(line, context) {
     context.strokeStyle = line.fontAtts.strokeColor

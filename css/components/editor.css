@@ -36,13 +36,6 @@
     color: var(--clr-background-primary);
 }
 
-.editor-container a:first-of-type {
-    font-size: 2rem;
-    font-family: chakra;
-}
-
-.editor-container a:last-of-type {}
-
 .editor-container canvas {
     position: absolute;
     left: 0;

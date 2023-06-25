@@ -48,7 +48,7 @@ function renderMeme(showSelector = true, combineLayers = false, image = new Imag
 function renderSelector() {//Draw rectangle around selected line, this'll be a headache I can tell(it was)
     const line = getMeme().lines[getCurrentLineIdx()]
     if (!line) return
-    const padding = 4//used to determine padding of text inside 'border'
+    const padding = 0//used to determine padding of text inside 'border'
     const rectangle = {
         x: line.cornerCoords.x - padding,
         y: line.cornerCoords.y - line.fontAtts.size,
