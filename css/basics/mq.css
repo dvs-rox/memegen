@@ -1,22 +1,60 @@
-/* mobile */
-@media(max-width:700px){ 
-    .main-layout{
+/* tablet */
+@media(max-width:1000px) {
+    .main-layout {
         display: grid;
-        grid-template-columns:0px 1fr 0px;
+        grid-template-columns: 0px 1fr 0px;
     }
-    .editor-container{
+
+    .editor-container {
         grid-template-columns: auto;
         padding-inline: 2px;
+        box-shadow: none;
+        padding: 1.5rem;
     }
+
+    body {
+        background-position: bottom;
+        background-size: cover;
+    }
+}
+
+
+
+/* mobile */
+@media(max-width:700px) {
+    .main-layout {
+        display: grid;
+        grid-template-columns: 0px 1fr 0px;
+    }
+
+    .editor-container {
+        grid-template-columns: auto;
+        padding-inline: 2px;
+        box-shadow: none;
+    }
+
     .editor-controls {
         grid-column: 1;
         grid-row: 2;
     }
-    div[name='txtColorPickerContainer'] i{
+
+    .editor-controls button {
+        box-shadow: 2px 2px 0px 0px var(--clr-background-primary);
+    }
+
+    .editor-controls button:active {
+        top: 2px;
+        left: 2px;
+        box-shadow: -1px -1px 0px 0px var(--clr-background-primary) !important;
+        box-shadow: none
+    }
+
+    div[name='txtColorPickerContainer'] i {
         position: absolute;
-        top:10%;
+        top: 10%;
         left: 30%;
     }
+
     .editor-container a:first-of-type {
         grid-column: 1;
         grid-row: 3;
@@ -24,6 +62,7 @@
         font-family: chakra;
         color: var(--clr-background-primary);
     }
+
     .editor-container a:last-of-type {
         grid-column: 1;
         grid-row: 4;
@@ -31,21 +70,19 @@
         font-family: chakra;
         color: var(--clr-background-primary);
     }
-    header{
+
+    header {
         margin-block-end: 10px;
     }
-    header nav{
-        margin-inline:10px;
+
+    header nav {
+        margin-inline: 10px;
     }
-    header nav h1{
+
+    header nav h1 {
         font-size: 1.5rem;
     }
 }
-/* tablet */
-@media(max-width:800px){
 
-}
 /* pc */
-@media(max-width:800px){
-
-}
+@media(max-width:800px) {}
