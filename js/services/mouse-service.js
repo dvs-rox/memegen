@@ -36,6 +36,7 @@ function _selectLineByCoords(event) {//first try baby let's gooooooooooooooo
         setLineIndex(lineIdx)
         focusOnInput(gElInputs.textBox)
         renderMeme()
+        setInputValues()
     }
 
 }
@@ -55,7 +56,10 @@ function _repositionLine(event) {
         x: gDragInfo.nextCoords.x,
         y: gDragInfo.nextCoords.y
     }
-    moveText(xDiff, yDiff)
+    setTimeout(() => {
+        moveText(xDiff, yDiff)
+    }, 150);
+    
 }
 //sets
 function _setCursorPosition(event) {//used only by event

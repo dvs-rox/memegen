@@ -7,7 +7,7 @@ let gElBgCanvas
 let gBgCtx
 let gElInputs
 let gImageDimensions
-//TODO:!!! when selecting a line adjust input values accordingly
+
 function onInit() {
     assignGlobalVars()
     renderGallery()
@@ -98,11 +98,16 @@ function focusOnInput(elinput) {
 }
 function setInputValues() {
     if (!getMeme().lines[getCurrentLineIdx()]) return
-    gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txts.join(' ')
-    console.log(getMeme().lines[getCurrentLineIdx()].fontAtts.color)
     //
-    const color = getMeme().lines[getCurrentLineIdx()].fontAtts.color
-    gElInputs.colorPicker.value = color
+    const line = getMeme().lines[getCurrentLineIdx()]
+    gElInputs.textBox.value = line.txts.join(' ')
+    //colorpicker stuff
+    gElInputs.colorPicker.value = line.fontAtts.color
+    document.querySelector('.fa-palette').style.color = line.color
+    //linewrap
+    gElInputs.lineWrap.value =line.lineBreak
+    document.querySelector('.editor-controls label h3 span').innerText = line.lineBreak
+
 }
 function resizeCanvas(image) {
     const canvasContainer = document.querySelector('.canvas-container')
@@ -172,8 +177,7 @@ function onImageChange(imgIdx) {
 }
 function onColorChange(ev) {
     setTextColor(ev.target.value)
-    console.log(document.querySelector('fa-palette'))
-    document.querySelector('fa-palette').style.color = ev.target.value
+    document.querySelector('.fa-palette').style.color = ev.target.value
     renderMeme()
 }
 function onDownloadImage(ev) {
@@ -205,6 +209,7 @@ function onSwitchLine() {
     scrollLineIndex()
     renderMeme()
     focusOnInput(gElInputs.textBox)
+    setInputValues()
 }
 function onShareToFacebook() {
     getDataUrl()//bad name, no time to organize

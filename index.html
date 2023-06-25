@@ -13,7 +13,8 @@
     <main class="main-layout">
         <header>
             <nav class="nav-container flex space-between">
-                <h1 class="capitalize neon-text-shadow" title="but make it vaporwave">meme generator</h1>
+                <h1 class="capitalize neon-text-shadow" title="but make it vaporwave"
+                    onclick="onNavLinkClick({target:document.getElementById('editorLink')})">meme generator</h1>
                 <ul class="clean-list capitalize flex space-between">
                     <li><a href="#" id="editorLink" onclick="onNavLinkClick(event)" class="selected">editor</a></li>
                     <li><a href="#" onclick="onNavLinkClick(event)">gallery</a></li>
@@ -21,7 +22,7 @@
                 </ul>
             </nav>
         </header>
-        <section class="editor-container">
+        <section class="editor-container" style="display: none;">
             <div class="canvas-container position-relative">
                 <canvas width="500" height="500" id="canvas-background"></canvas>
                 <canvas width="500" height="500" id="canvas-editor">
@@ -31,7 +32,8 @@
             <div class="editor-controls">
                 <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)"
                     onload="this.focus()">
-                <label class="lineWrap-container" for="range"> <h3>wrap every <span>5</span> words</h3>
+                <label class="lineWrap-container" for="range">
+                    <h3>wrap every <span>5</span> words</h3>
                     <input min="1" max="15" type="range" name="lineWrap" id="lineWrap" oninput="onSetLineWrap(this)">
                 </label>
                 <button name="txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">
@@ -42,13 +44,11 @@
                     <i class="fa-solid fa-font fa-3x"></i>
                     <i class="fa-solid fa-arrow-down fa-3x"></i>
                 </button>
-                <div name="txtColorPickerContainer">
-                    <label for="txtColorPicker">
-                        <i class="fa-solid fa-palette fa-4x"></i>
-                    </label>
-                    <input name="txtColorPicker" id="txtColorPicker" title="color picker for text color of current line"
-                        type="color" oninput="onColorChange(event)" style1="display: none;">
-                </div>
+                <button onclick="document.getElementById('txtColorPicker').focus();document.getElementById('txtColorPicker').click()">
+                    <i class="fa-solid fa-palette fa-4x" ></i>
+                </button>
+                <input name="txtColorPicker" id="txtColorPicker" title="pick text color" type="color"
+                    oninput="onColorChange(event)" style="display: none;">
 
                 <button name=" addLine" title="add line" onclick="onAddLine()">
                     <i class="fa-solid fa-square-plus fa-3x"></i>
@@ -59,22 +59,22 @@
                 <button name="removeLine" title="add line" onclick="onRemoveLine()">
                     <i class="fa-solid fa-square-minus fa-3x"></i>
                 </button>
-                <button name='rotateIncrease' onclick="onRotateText(+5)">
+                <button name='rotateIncrease' onclick="onRotateText(+5)" title="rotate text clockwise">
                     <i class="fa-solid fa-arrow-rotate-right fa-3x"></i>
                 </button>
-                <button name="moveUp" onclick="onMoveText('up')">
+                <button name="moveUp" onclick="onMoveText('up')" title="move text up">
                     <i class="fa-solid fa-arrow-up fa-3x"></i>
                 </button>
-                <button name='rotateDecrease' onclick="onRotateText(-5)">
+                <button name='rotateDecrease' onclick="onRotateText(-5)" title="rotate text counter clockwise">
                     <i class="fa-solid fa-arrow-rotate-left fa-3x"></i>
                 </button>
-                <button name="moveLeft" onclick="onMoveText('left')">
+                <button name="moveLeft" onclick="onMoveText('left')" title="move text left">
                     <i class="fa-solid fa-arrow-left fa-3x"></i>
                 </button>
-                <button name="moveDown" onclick="onMoveText('down')">
+                <button name="moveDown" onclick="onMoveText('down')" title="move text down">
                     <i class="fa-solid fa-arrow-down fa-3x"></i>
                 </button>
-                <button name="moveRight" onclick="onMoveText('right')">
+                <button name="moveRight" onclick="onMoveText('right')" title="move text right">
                     <i class="fa-solid fa-arrow-right fa-3x"></i>
                 </button>
             </div>
@@ -83,7 +83,7 @@
                 download="my meme.jpg">download image</a>
             <a href="#" onclick="onShareToFacebook()">share to facebook</a>
         </section>
-        <section class="gallery-container" style="display: none;">
+        <section class="gallery-container" >
         </section>
         <!-- <div class="uploadImageModal"> -->
         <!-- <input type="file" name="uploadFile" id="uploadFile" accept="image/*" onchange="onFileUpload(this)"> -->
