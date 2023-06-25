@@ -8,11 +8,11 @@ function onNavLinkClick(ev) {
     ev.target.classList.add('selected')
     switch (selectedLink.innerText.toLowerCase()) {
         case 'editor':
-            gElEditor.style= ''
+            gElEditor.style = ''
             gElInputs.textBox.value = ''
             break
         case 'gallery':
-            gElGallery.style = ''
+            document.querySelector('.gallery-container').style = ''
             break
         case 'about':
             break
@@ -26,7 +26,10 @@ function cleanNavBar() {
 }
 function hideAllSections() {
     const elSections = document.querySelectorAll('section')
+    console.log(elSections)
+    elSections[2] = null
     elSections.forEach(section => {
         section.style = 'display:none'
     });
+    elSections[2].style = ''//hackity hack
 }

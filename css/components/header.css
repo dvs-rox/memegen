@@ -1,6 +1,6 @@
 header{
     grid-column: 1 / -1;
-    margin-block-end: 60px;
+    /* margin-block-end: 60px; */
     height: fit-content;
     background: linear-gradient(150deg, var(--clr-background-primary) 7%, var(--clr-background-secondary) 91%);
 }

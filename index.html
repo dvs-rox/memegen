@@ -30,8 +30,8 @@
             </div>
 
             <div class="editor-controls">
-                <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)" placeholder="Enter text here"
-                    onload="this.focus()">
+                <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)"
+                    placeholder="Enter text here" onload="this.focus()">
                 <label class="lineWrap-container" for="range">
                     <h3>wrap every <span>5</span> words</h3>
                     <input min="1" max="15" type="range" name="lineWrap" id="lineWrap" oninput="onSetLineWrap(this)">
@@ -44,8 +44,9 @@
                     <i class="fa-solid fa-font fa-3x"></i>
                     <i class="fa-solid fa-arrow-down fa-3x"></i>
                 </button>
-                <button onclick="document.getElementById('txtColorPicker').focus();document.getElementById('txtColorPicker').click()">
-                    <i class="fa-solid fa-palette fa-4x" ></i>
+                <button
+                    onclick="document.getElementById('txtColorPicker').focus();document.getElementById('txtColorPicker').click()">
+                    <i class="fa-solid fa-palette fa-4x"></i>
                 </button>
                 <input name="txtColorPicker" id="txtColorPicker" title="pick text color" type="color"
                     oninput="onColorChange(event)" style="display: none;">
@@ -78,11 +79,17 @@
                     <i class="fa-solid fa-arrow-right fa-3x"></i>
                 </button>
             </div>
-            <a name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)"
-                download="my meme.jpg">download image</a>
+            <a id="imgDownload" name="imgDownload" title="download your meme" href="#" onclick="onDownloadImage(event)"
+                download="mymeme.jpg">download image</a>
             <a href="#" onclick="onShareToFacebook()">share to facebook</a>
         </section>
-        <section class="gallery-container" >
+        <section class="gallery-container">
+            <div class="gallery-search flex">
+                <input type="text" name="searchBar" id="searchBar" oninput="renderBySearchParams(event)" placeholder="Search...">
+            </div>
+            <section>
+
+            </section>
         </section>
         <!-- <div class="uploadImageModal"> -->
         <!-- <input type="file" name="uploadFile" id="uploadFile" accept="image/*" onchange="onFileUpload(this)"> -->

@@ -5,9 +5,9 @@ let gCtx
 //background canvas
 let gElBgCanvas
 let gBgCtx
-let gElInputs= {}
+let gElInputs = {}
 let gImageDimensions
-
+let flipper
 function onInit() {
     assignGlobalVars()
     renderGallery()
@@ -89,7 +89,7 @@ function assignGlobalVars() {
         colorPicker: document.getElementById('txtColorPicker'),
         lineWrap: document.getElementById('lineWrap')
     }
-
+    flipper = 0
     gElInputs.lineWrap.value = 5
     gElInputs.lineWrap.title = `wrap every ${gElInputs.lineWrap.value} words`
 }
@@ -105,7 +105,7 @@ function setInputValues() {
     gElInputs.colorPicker.value = line.fontAtts.color
     document.querySelector('.fa-palette').style.color = line.color
     //linewrap
-    gElInputs.lineWrap.value =line.lineBreak
+    gElInputs.lineWrap.value = line.lineBreak
     document.querySelector('.editor-controls label h3 span').innerText = line.lineBreak
 
 }
@@ -184,13 +184,13 @@ function onDownloadImage(ev) {
     renderMeme(false, true)
     const elLink = ev.target
     setTimeout(() => {
-        const imgContent = gElCanvas.toDataURL('image/jpg')
+        const imgContent = gElCanvas.toDataURL('image/jpeg')
         elLink.href = imgContent
     }, 300);
-    setTimeout(() => {
-        ev.target.href
-    }, 300);
 }
+function foo(ev) {
+}
+
 function onFontSizeChange(val) {
     setTextSize(val)
     renderMeme()
