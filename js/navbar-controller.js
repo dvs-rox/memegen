@@ -9,7 +9,7 @@ function onNavLinkClick(ev) {
     switch (selectedLink.innerText.toLowerCase()) {
         case 'editor':
             gElEditor.style= ''
-            gElInputs.value.textBox = ''
+            gElInputs.textBox.value = ''
             break
         case 'gallery':
             gElGallery.style = ''

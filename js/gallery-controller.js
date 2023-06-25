@@ -39,8 +39,6 @@ function initImageSearchParams() {
 
 function renderBySearchParams() {
     gImageSearchParams.forEach(tags => {
-        // const tagArr = tags.tags.split(' ')
-        // console.log(tagArr)
         if (tags.tags.split(' ').includes('dog')) console.log(tags)
     });
 }
