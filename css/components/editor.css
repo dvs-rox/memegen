@@ -26,21 +26,23 @@
         "moveLeft moveDown moveRight";
     gap: 5px;
 }
-.editor-container a{
+
+.editor-container a {
     font-size: 2rem;
     font-family: chakra;
     text-transform: capitalize;
     width: fit-content;
-    text-shadow: var(--clr-font-shadow-primary) 3px 3px  20px;
+    text-shadow: var(--clr-font-shadow-primary) 3px 3px 20px;
     color: var(--clr-background-primary);
 }
+
 .editor-container a:first-of-type {
     font-size: 2rem;
     font-family: chakra;
 }
-.editor-container a:last-of-type{
 
-}
+.editor-container a:last-of-type {}
+
 .editor-container canvas {
     position: absolute;
     left: 0;
@@ -55,20 +57,27 @@
 .canvas-editor {
     cursor: grab;
 }
-.editor-controls button{
+
+.editor-controls button {
+    position: relative;
     background: radial-gradient(circle, var(--clr-font-primary) 10%, var(--clr-font-secondary) 90%);
     border-radius: 1rem;
     box-shadow: 7px 7px 0px 0px var(--clr-background-primary);
-    border:0px
+    border: 1px #79fffda7 solid;
 }
-.editor-controls button:active{
-    border:2px solid var(--clr-background-primary);
-    box-shadow:none
+
+.editor-controls button:active {
+    top: 7px;
+    left: 7px;
+    box-shadow: -1px -1px 0px 0px var(--clr-background-primary) !important;
+    box-shadow: none
 }
-.editor-controls button:hover{
+
+.editor-controls button:hover {
     cursor: pointer;
 }
-.editor-controls button i{
+
+.editor-controls button i {
     padding-block: 1rem;
 }
 
@@ -85,22 +94,25 @@ div[name='txtColorPickerContainer'] {
     width: 100%;
     height: 100%;
 }
-div[name='txtColorPickerContainer'] input{
+
+div[name='txtColorPickerContainer'] input {
     padding: .5rem;
     background: radial-gradient(circle, var(--clr-font-primary) 10%, var(--clr-font-secondary) 90%);
     border-radius: 1rem;
     box-shadow: 7px 7px 0px 0px var(--clr-background-primary);
-    border:0px;
+    border: 0px;
     cursor: pointer;
     width: 100%;
     height: 100%;
 }
-div[name='txtColorPickerContainer'] i{
+
+div[name='txtColorPickerContainer'] i {
     pointer-events: none;
     position: absolute;
-    top:20%;
+    top: 20%;
     left: 20%;
 }
+
 input[name='imgDownload'] {
     grid-area: downloadLink;
 }
@@ -149,6 +161,21 @@ input[name='moveDown'] {
     grid-area: moveDown
 }
 
-input[name='lineWrap'] {
-    grid-area: lineWrap
+
+.lineWrap-container {
+    grid-area: lineWrap;
+    font-family: chakra;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
 }
+/* input[type='range']{
+    appearance: none; 
+    background:var(--clr-background-primary);
+    border-radius: 2px;
+    height:4px;
+}
+input[type='range']::-webkit-slider-thumb{
+    appearance: none !important;
+    /* background: radial-gradient( var(--clr-font-primary),var(--clr-background-secondary)); 
+} */

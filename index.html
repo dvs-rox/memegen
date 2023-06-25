@@ -31,8 +31,10 @@
             <div class="editor-controls">
                 <input name="linetext" id="linetext" title="line text input" type="text" oninput="onTextChange(event)"
                     onload="this.focus()">
-                <input min="1" max="15" type="range" name="lineWrap" id="lineWrap" oninput="onSetLineWrap(event)">
-                <button name=" txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">
+                <label class="lineWrap-container" for="range"> <h3>wrap every <span>5</span> words</h3>
+                    <input min="1" max="15" type="range" name="lineWrap" id="lineWrap" oninput="onSetLineWrap(this)">
+                </label>
+                <button name="txtIncrease" title="Increase font size" onclick="onFontSizeChange(4)">
                     <i class="fa-solid fa-font fa-3x"></i>
                     <i class="fa-solid fa-arrow-up fa-3x"></i>
                 </button>
@@ -83,11 +85,17 @@
         </section>
         <section class="gallery-container" style="display: none;">
         </section>
+        <!-- <div class="uploadImageModal"> -->
+        <!-- <input type="file" name="uploadFile" id="uploadFile" accept="image/*" onchange="onFileUpload(this)"> -->
+        <!-- </div> -->
     </main>
+    <script src="js/util/util.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/services/mouse-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/services/text-service.js"></script>
+    <script src="js/services/modal-service.js"></script>
+    <script src="js/modal-controller.js"></script>
     <script src="js/navbar-controller.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/util/sharing-service.js"></script>

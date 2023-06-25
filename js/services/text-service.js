@@ -38,7 +38,7 @@ function updateTextWidth(line = getMeme().lines[gCurrentLineIndex]) {
         if (ctx.measureText(row).width > ctx.measureText(longest).width) longest = row
     })
     console.log('longest:', longest)
-    line.txtWidth = ctx.measureText(longest).width
+    line.txtWidth = ctx.measureText(longest).width+line.fontAtts.size
 }
 function setContextAttributes(line, context) {
     context.strokeStyle = line.fontAtts.strokeColor

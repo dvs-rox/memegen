@@ -18,16 +18,15 @@ function onInit() {
     renderMeme()
     initListeners()
 }
-function renderMeme(showSelector = true, combineLayers = false) {
+function renderMeme(showSelector = true, combineLayers = false, image = new Image()) {
     clearCanvas(gCtx)//resets main canvas, not background layer
     const meme = getMeme()
-    const image = new Image()
     image.onload = () => {
         resizeCanvas(image)
-        if (combineLayers){
+        if (combineLayers) {
             console.log('squishing layers')
             gCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
-        } 
+        }
         gBgCtx.drawImage(image, 0, 0, gImageDimensions.sWidth, gImageDimensions.sHeight)
         meme.lines.forEach((line) => {
             if (line.angle != 0) {
@@ -101,8 +100,9 @@ function setInputValues() {
     if (!getMeme().lines[getCurrentLineIdx()]) return
     gElInputs.textBox.value = getMeme().lines[getCurrentLineIdx()].txts.join(' ')
     console.log(getMeme().lines[getCurrentLineIdx()].fontAtts.color)
-    console.log(gElInputs.colorPicker)
-    gElInputs.colorPicker.value = getMeme().lines[getCurrentLineIdx()].fontAtts.color
+    //
+    const color = getMeme().lines[getCurrentLineIdx()].fontAtts.color
+    gElInputs.colorPicker.value = color
 }
 function resizeCanvas(image) {
     const canvasContainer = document.querySelector('.canvas-container')
@@ -112,7 +112,7 @@ function resizeCanvas(image) {
     let newHeight
     if (orientation === 'landscape') {
         newWidth = 500 * aspectRatio
-        newHeight = 600
+        newHeight = 500
     } else {
         newWidth = 500
         newHeight = 500 * aspectRatio
@@ -125,7 +125,9 @@ function resizeCanvas(image) {
     canvasContainer.style.height = newHeight + 'px'
     canvasContainer.style.width = newWidth + 'px'
 }
+function setCustomImage(img) {
 
+}
 //event driven
 function onMoveText(direction) {
     const moveAmount = 20
@@ -153,20 +155,25 @@ function onTextChange(ev) {
     setLineText(ev.target.value)
     renderMeme()
 }
-function onSetLineWrap(ev) {
-    setLineWrap(ev.target.value)
-    ev.target.title = `wrap every ${getMeme().lines[getCurrentLineIdx()].lineBreak} words`
+function onSetLineWrap(el) {
+    setLineWrap(el.value)
+    const span = document.querySelector('.lineWrap-container span')
+    span.innerText = getMeme().lines[getCurrentLineIdx()].lineBreak
+    const str = `wrap every ${getMeme().lines[getCurrentLineIdx()].lineBreak} words`
+    el.title = str
     updateRows()
     updateTextWidth()
     renderMeme()
 }
 function onImageChange(imgIdx) {
-    onNavLinkClick({ target: document.getElementById('editorLink')})//pretty proud of this hack ngl lol
+    onNavLinkClick({ target: document.getElementById('editorLink') })//pretty proud of this hack ngl lol
     setMemeImage(imgIdx)
     renderMeme()
 }
 function onColorChange(ev) {
     setTextColor(ev.target.value)
+    console.log(document.querySelector('fa-palette'))
+    document.querySelector('fa-palette').style.color = ev.target.value
     renderMeme()
 }
 function onDownloadImage(ev) {
@@ -199,6 +206,6 @@ function onSwitchLine() {
     renderMeme()
     focusOnInput(gElInputs.textBox)
 }
-function onShareToFacebook(){
+function onShareToFacebook() {
     getDataUrl()//bad name, no time to organize
 }
