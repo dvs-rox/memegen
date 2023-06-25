@@ -41,7 +41,7 @@ function renderMeme(showSelector = true, combineLayers = false, image = new Imag
             }
         });
     }
-    image.src = `../img/templates/${meme.selectedImgId}.jpg`
+    image.src = `./img/templates/${meme.selectedImgId}.jpg`
     focusOnInput(gElInputs.textBox)
     // setInputValues()
 }
